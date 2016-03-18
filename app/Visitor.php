@@ -1,0 +1,18 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Visitor extends Model
+{
+
+	public function user(){
+    	return $this->hasOne('App\User');
+    }
+
+    public function city(){
+    	return $this->hasOne('App\City');
+    }
+
+}
