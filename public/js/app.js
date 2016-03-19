@@ -1,4 +1,4 @@
-angular.module('biblioteca', [], function($interpolateProvider){
+angular.module('biblioteca', ['ui.bootstrap'], function($interpolateProvider){
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 });

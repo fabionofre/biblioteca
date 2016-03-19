@@ -73,7 +73,7 @@
 @section('scripts')
 <script src="js/angular.min.js"></script>
 <script src="js/app.js"></script>
-<script src="js/controllers/usuarioModulo.js"></script>
+<script src="js/controllers/usuarioController.js"></script>
 <script src="js/services/usuarioAPIService.js"></script>
 <script src="js/configs/configValue.js"></script>
 @endsection

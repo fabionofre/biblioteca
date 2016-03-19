@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\User;
-//use Request;
 
-class UsuarioController extends Controller
+use App\Cabinet;
+
+class CabinetController extends Controller
 {
     /**
 	 * Método GET
@@ -16,9 +16,9 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function index() {
- 
-		$User = User::all();
-		return $User;
+ 		
+		$Cabinet = Cabinet::all();
+		return $Cabinet;
 	}
  
 	/**
@@ -27,9 +27,8 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		$request['password'] = bcrypt($request['password']);
-		$User = User::create($request->all());
-		return $User;
+		$Cabinet = Cabinet::create($request->all());
+		return $Cabinet;
 	}
  
 	/**
@@ -39,11 +38,11 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function update($id, Request $request) {
-		$User = User::find($id);
-		// $User->'campoASerEditado' = $request['campo']; EXEMPLO
-		$User->save();
+		$Cabinet = User::find($id);
+		// $Cabinet->'campoASerEditado' = $request['campo']; EXEMPLO
+		$Cabinet->save();
  
-		return $User;
+		return $Cabinet;
 	}
  
 	/**
@@ -53,11 +52,15 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function destroy($id) {
-		$User = User::find($id);
-		$User->status = 0;
-		$User->save();
+		$Cabinet = Cabinet::find($id);
+		$Cabinet->status = 0;
+		$Cabinet->save();
+		return $Cabinet;
+	}	
 
-		return $User;
+	public function show($id) {
+		$Cabinet = Cabinet::find($id);
+		return $Cabinet;
 	}
  
 }
