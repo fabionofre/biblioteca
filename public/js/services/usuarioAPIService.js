@@ -1,3 +1,4 @@
+//Serviço construtor de AJAX para tabela users.
 angular.module('biblioteca')
 
 .service("usuarioAPI", function($http, config){

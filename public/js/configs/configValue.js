@@ -1,3 +1,4 @@
+//Arquivo para configurar uma URL base(usada somente no front).
 angular.module("biblioteca")
 
 .value("config", {

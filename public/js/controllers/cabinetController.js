@@ -1,3 +1,4 @@
+//Criação de dois controladores no módulo biblioteca, um para os armários e outro para um modal.
 angular.module('biblioteca')
 
 .controller('cabinetCtrl', function($scope, $uibModal, cabinetAPI) {

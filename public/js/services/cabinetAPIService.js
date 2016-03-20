@@ -1,3 +1,4 @@
+//Serviço construtor de AJAX para a tabela cabinets.
 angular.module('biblioteca')
 
 .service("cabinetAPI", function($http, config){

@@ -1,5 +1,5 @@
 <?php
-
+//Controlador que persiste os dados da tabela users.
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
