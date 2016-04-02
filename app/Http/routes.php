@@ -35,6 +35,9 @@ Route::group(['middleware' => 'web'], function () {
    Route::get('/', function () {
     	return view('welcome');
    });
+   Route::get('/register', function(){
+		return view('auth/register');
+  	});
 });
 
 Route::resource('api/v1.0/Usuario', 'UsuarioController');
@@ -42,7 +45,5 @@ Route::resource('api/v1.0/Cabinet', 'CabinetController');
 
 
 Route::group(['middleware' => ['web', 'auth.admin']], function() {
-	Route::get('/register', function(){
-		return view('auth/register');
-	});
+	
 });

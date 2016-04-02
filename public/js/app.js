@@ -1,4 +1,4 @@
-angular.module('biblioteca', ['ui.bootstrap'], function($interpolateProvider){
+angular.module('biblioteca', ['ngRoute'], function($interpolateProvider){
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 });

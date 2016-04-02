@@ -1,7 +1,7 @@
-//Criação de dois controladores no módulo biblioteca, um para os armários e outro para um modal.
+//Criação de um controladore no módulo biblioteca para os armários.
 angular.module('biblioteca')
 
-.controller('cabinetCtrl', function($scope, $uibModal, cabinetAPI) {
+.controller('cabinetCtrl', function($scope, cabinetAPI) {
 	
 	$scope.carregarArmarios = function () {
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
@@ -10,15 +10,15 @@ angular.module('biblioteca')
 		});
 	}
 
-	$scope.abrirCabinet = function(id){
+/*	$scope.abrirCabinet = function(id){
 		cabinetAPI.buscarCabinet(id).success(function(data){
 			console.log(data);
 		});
-	}
+	}*/
 
 	$scope.carregarArmarios();
 
-	 $scope.modalCabinet = function () {
+/*	 $scope.modalCabinet = function () {
 
     var modalInstance = $uibModal.open({
       animation: true,
@@ -35,11 +35,11 @@ angular.module('biblioteca')
     }, function () {
 
     });
-  };
+  };*/
 
 });
 
-angular.module('biblioteca')
+/*angular.module('biblioteca')
 
 .controller('modalCabinetCtrl', function($scope, $uibModalInstance){
 	$scope.ok = function () {
@@ -49,4 +49,4 @@ angular.module('biblioteca')
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});
+});*/

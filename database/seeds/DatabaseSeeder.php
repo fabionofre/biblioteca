@@ -5,6 +5,7 @@ use App\Cabinet;
 use App\State;
 use App\City;
 use App\Visitor;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +21,9 @@ class DatabaseSeeder extends Seeder
 		$date = date('Y-m-d H:i');
         Cabinet::create([
         	'data_hora' => $date,
-        	'status' => 1,
-        	'visitor_id' => 2 
+            'status' => 1,
+            'visitor_id' => 1
         ]);
     }
+
 }

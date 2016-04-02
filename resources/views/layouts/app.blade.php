@@ -25,7 +25,7 @@
         }
     </style>
 </head>
-<body id="app-layout">
+<body id="app-layout" ng-app="biblioteca">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -78,12 +78,19 @@
     </nav>
 
     @yield('content')
+    <div ng-view></div>
 
     <!-- JavaScripts -->
-    @yield('modals')
-    @yield('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="js/app.js"></script>
+    <script src="js/configs/routeConfig.js"></script>
+    @yield('scripts')
+    <!-- Scripts do teste -->
+    <script src="js/services/cabinetAPIService.js"></script>
+    <script src="js/configs/configValue.js"></script> 
+    <script src="js/controllers/cabinetController.js"></script>
 </body>
 </html>
