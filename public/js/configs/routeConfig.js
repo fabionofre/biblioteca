@@ -2,6 +2,7 @@ angular.module('biblioteca')
 	.config(function($routeProvider){
 		$routeProvider
 			.when("/armarios", {
-				templateUrl: "../resources/viewteste.html"
+				templateUrl: "views/armarios.html",
+                controller: "cabinetCtrl"
 		});
 });

@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Armários</a></li>
+                    <li><a href="#/armarios">Armários</a></li>
                     @if(Auth::guest())
                     @else
                     @if (Auth::user()->tipo == 'admin')
@@ -77,7 +77,6 @@
         </div>
     </nav>
 
-    @yield('content')
     <div ng-view></div>
 
     <!-- JavaScripts -->
@@ -87,10 +86,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/configs/routeConfig.js"></script>
-    @yield('scripts')
-    <!-- Scripts do teste -->
-    <script src="js/services/cabinetAPIService.js"></script>
-    <script src="js/configs/configValue.js"></script> 
-    <script src="js/controllers/cabinetController.js"></script>
+    <script src="js/configs/configValue.js"></script>
+    <!-- Scripts dos armarios -->
+     <script src="js/controllers/cabinetController.js"></script>
+     <script src="js/services/cabinetAPIService.js"></script>
 </body>
 </html>

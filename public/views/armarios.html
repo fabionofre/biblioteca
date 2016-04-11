@@ -1,9 +1,5 @@
-@extends('layouts.app')
-@section('css')
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-@endsection
-@section('content')
 <div class="container" ng-controller="cabinetCtrl">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -40,11 +36,7 @@
     </div>
 </div>
 </div>
-@endsection
-@section('scripts')
-<script src="js/ui-bootstrap-1.2.4.min.js"></script>
 <script src="js/controllers/cabinetController.js"></script>
 <script src="js/services/cabinetAPIService.js"></script>
-<script src="js/configs/configValue.js"></script>
-@endsection
+
 

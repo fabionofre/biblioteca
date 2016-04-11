@@ -73,10 +73,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-<script src="js/ui-bootstrap-1.2.4.min.js"></script>
-<script src="js/app.js"></script>
 <script src="js/controllers/usuarioController.js"></script>
 <script src="js/services/usuarioAPIService.js"></script>
-<script src="js/configs/configValue.js"></script>
 @endsection
