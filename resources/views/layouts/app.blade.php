@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    @yield('css')
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -51,7 +51,7 @@
                     @if(Auth::guest())
                     @else
                     @if (Auth::user()->tipo == 'admin')
-                    <li><a href="{{ url('/register') }}">Cadastrar</a></li>
+                    <li><a href="#/registrar">Cadastrar</a></li>
                     @endif
                     @endif
                 </ul>
@@ -60,7 +60,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{url('login')}}">Login</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </nav>
-
+        
     <div ng-view></div>
 
     <!-- JavaScripts -->
@@ -90,5 +90,9 @@
     <!-- Scripts dos armarios -->
      <script src="js/controllers/cabinetController.js"></script>
      <script src="js/services/cabinetAPIService.js"></script>
+     
+     <script src="js/controllers/usuarioController.js"></script>
+     <script src="js/services/usuarioAPIService.js"></script>
+     
 </body>
 </html>

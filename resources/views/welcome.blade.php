@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@section('css')
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-@endsection
 @section('content')
 <div class="container">
     <div class="row">

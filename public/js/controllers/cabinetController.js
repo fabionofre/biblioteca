@@ -9,6 +9,12 @@ angular.module('biblioteca')
 			console.log($scope.cabinets);
 		});
 	}
+    
+    $scope.botaoChevron = function(cabinetBtn){
+                cabinetBtn = !cabinetBtn;
+                console.log(cabinetBtn);
+                return cabinetBtn;
+    }
 
 /*	$scope.abrirCabinet = function(id){
 		cabinetAPI.buscarCabinet(id).success(function(data){

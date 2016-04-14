@@ -1,8 +1,4 @@
-@extends('layouts.app')
-@section('css')
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-@endsection
-@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -57,4 +53,5 @@
         </div>
     </div>
 </div>
-@endsection
+
+
