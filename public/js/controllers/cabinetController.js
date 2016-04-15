@@ -1,58 +1,43 @@
-//Criação de um controladore no módulo biblioteca para os armários.
+//Criação de um controlador no módulo biblioteca para os armários.
 angular.module('biblioteca')
 
-.controller('cabinetCtrl', function($scope, cabinetAPI) {
+.controller('cabinetCtrl', function($scope, cabinetAPI, $uibModal) {
 	
-	$scope.carregarArmarios = function () {
+	var _carregarArmarios = function () {
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
 			console.log($scope.cabinets);
 		});
 	}
+
+	_carregarArmarios();
     
-    $scope.botaoChevron = function(cabinetBtn){
-                cabinetBtn = !cabinetBtn;
-                console.log(cabinetBtn);
-                return cabinetBtn;
+    $scope.abrirArmario = function(id){
+        var modalInstance = $uibModal.open({
+            templateUrl: 'views/modalArmario.html',
+            controller: 'modalArmarioCtrl',
+            resolve: {
+                armarioId: function(){
+                    return id;
+                }
+            }
+        });
     }
+    
+    
 
-/*	$scope.abrirCabinet = function(id){
-		cabinetAPI.buscarCabinet(id).success(function(data){
-			console.log(data);
-		});
-	}*/
+})
 
-	$scope.carregarArmarios();
-
-/*	 $scope.modalCabinet = function () {
-
-    var modalInstance = $uibModal.open({
-      animation: true,
-      templateUrl: 'modalCabinet.blade.php',
-      controller: 'modalCabinetCtrl',
-      resolve: {
-        infoArmario: function () {
-          return $scope.infoArmario;
-        }
-      }
-    });
-
-    modalInstance.result.then(function () {
-    }, function () {
-
-    });
-  };*/
-
-});
-
-/*angular.module('biblioteca')
-
-.controller('modalCabinetCtrl', function($scope, $uibModalInstance){
-	$scope.ok = function () {
-    	$uibModalInstance.close();
-  	};
+.controller('modalArmarioCtrl', function($scope, $uibModalInstance, armarioId){
+   
+   $scope.armarioId = armarioId;
+   
+   $scope.ok = function () {
+    $uibModalInstance.close();
+   };
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-});*/
+   
+});

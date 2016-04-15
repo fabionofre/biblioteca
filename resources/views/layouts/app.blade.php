@@ -80,10 +80,12 @@
     <div ng-view></div>
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ui-bootstrap-1.2.4.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.2.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/configs/routeConfig.js"></script>
     <script src="js/configs/configValue.js"></script>
