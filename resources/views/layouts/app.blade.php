@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -39,7 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="#/">
+                <a class="navbar-brand" href="#/inicio">
                     Laravel
                 </a>
             </div>
@@ -47,9 +47,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="#/armarios">Armários</a></li>
                     @if(Auth::guest())
                     @else
+                    <li><a href="/#/armarios">Armários</a></li>
                     @if (Auth::user()->tipo == 'admin')
                     <li><a href="#/registrar">Cadastrar</a></li>
                     @endif
@@ -60,7 +60,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="#/login">Login</a></li>
+                        <li><a href="/login">Login</a></li>
                     @else
                         <li>
                             <a href="{{ url('/logout') }}"> 
@@ -72,6 +72,8 @@
             </div>
         </div>
     </nav>
+
+
         
     <div ng-view></div>
 

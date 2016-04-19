@@ -13,5 +13,10 @@ angular.module('biblioteca')
             .when("/login", {
                 templateUrl: "views/login.html",
         })
-            
+            .when("/inicio", {
+                templateUrl: "views/welcome.html"
+        })
+            $routeProvider.otherwise({
+                redirectTo: "/inicio"
+            })
 });
