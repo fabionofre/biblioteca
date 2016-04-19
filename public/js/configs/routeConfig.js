@@ -9,5 +9,9 @@ angular.module('biblioteca')
                 templateUrl: "views/registrar.html",
                 controller: "usuarioCtrl"
         })
+        
+            .when("/login", {
+                templateUrl: "views/login.html",
+        })
             
 });

@@ -39,7 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="#/">
                     Laravel
                 </a>
             </div>
@@ -60,16 +60,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{url('login')}}">Login</a></li>
+                        <li><a href="#/login">Login</a></li>
                     @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                        <li>
+                            <a href="{{ url('/logout') }}"> 
+                                {{ Auth::user()->name }}
                             </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Sair</a></li>
-                            </ul>
                         </li>
                     @endif
                 </ul>
@@ -82,8 +78,6 @@
     <!-- JavaScripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/ui-bootstrap-1.2.4.min.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.2.min.js"></script>
     <script src="js/app.js"></script>
