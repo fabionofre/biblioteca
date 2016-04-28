@@ -77,20 +77,26 @@
         
     <div ng-view></div>
 
-    <!-- JavaScripts -->
+</body>
+<footer>
+    <div class="col-md-4"></div>
+    <div>© 2016 Biblioteca Pública Estadual | Desenvolvido por Fábio Onofre </div>
+</footer>
+<!-- Dependências -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <script src="js/ui-bootstrap-1.2.4.min.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<!-- Módulo AngularJS -->
     <script src="js/app.js"></script>
+<!-- Configs AngularJS -->
     <script src="js/configs/routeConfig.js"></script>
     <script src="js/configs/configValue.js"></script>
-    <!-- Scripts dos armarios -->
-     <script src="js/controllers/cabinetController.js"></script>
-     <script src="js/services/cabinetAPIService.js"></script>
-     
-     <script src="js/controllers/usuarioController.js"></script>
-     <script src="js/services/usuarioAPIService.js"></script>
-     
-</body>
+<!-- Controlador e serviços dos armários -->
+    <script src="js/controllers/cabinetController.js"></script>
+    <script src="js/services/cabinetAPIService.js"></script>
+<!-- Controlador e serviços dos usuários -->    
+    <script src="js/controllers/usuarioController.js"></script>
+    <script src="js/services/usuarioAPIService.js"></script>
 </html>
+

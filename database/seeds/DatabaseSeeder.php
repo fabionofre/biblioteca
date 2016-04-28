@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         Cabinet::create([
         	'data_hora' => $date,
             'status' => 1,
-            'visitor_id' => 1
+            'visitor_id' => 1;
         ]);
     }
 

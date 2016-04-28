@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Cabinet;
 
+use Carbon\Carbon;
+
 class CabinetController extends Controller
 {
     /**
@@ -27,7 +29,11 @@ class CabinetController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		$Cabinet = Cabinet::create($request->all());
+        $cabinet = $request->all();
+        date_default_timezone_set('America/Sao_Paulo');
+		$data_hora = date('Y-m-d H:i');
+        $cabinet['data_hora'] = $data_hora;
+		$Cabinet = Cabinet::create($cabinet);
 		return $Cabinet;
 	}
  

@@ -1,18 +1,39 @@
 <div class="container" ng-controller="cabinetCtrl">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-9 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Armários</div>
+                <div class="panel-heading">Armários
+                    <a ng-click="adicionarArmario();" class="botaoAdd btn btn-primary pull-right"><i class="fa fa-plus-square"></i></a>
+                </div>
                 <div class="panel-body row">
                     <div ng-repeat="cabinet in cabinets">
                         <div class="col-md-1" style="margin-left: 5px;margin-top: 5px">
-                           <a title="Armário desativado" class="btn btn-warning btn-large btn-block" style="border-radius: 0px;" ng-click="abrirArmario(cabinet.id);"><%cabinet.id%></a>
+                           <a title="<%cabinet.title%>" ng-class="cabinet.classe" style="border-radius: 0px;" ng-click="abrirArmario(cabinet.id);"><%cabinet.id%></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div style="margin-top: 3%;"class="col-md-2">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="livres"> Livres
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="ocupados"> Ocupados
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="quebrados"> Quebrados
+                </label>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/controllers/cabinetController.js"></script>
-<script src="js/services/cabinetAPIService.js"></script>
+
+<script src="js/controllers/usuarioController.js"></script>
+<script src="js/services/usuarioAPIService.js"></script>

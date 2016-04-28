@@ -2,8 +2,8 @@
 angular.module('biblioteca')
 
 .service("cabinetAPI", function($http, config){
-	this.saveCabinet = function(usuario) {
-		return $http.post(config.baseUrl + '/Cabinet', usuario);
+	this.saveCabinet = function(cabinet) {
+		return $http.post(config.baseUrl + '/Cabinet', cabinet);
 	}
 
 	this.buscarCabinets = function(){

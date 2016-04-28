@@ -1,4 +1,5 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>   
 <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -76,7 +77,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        <!--
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
@@ -86,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        -->
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -100,5 +101,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <div class="col-md-4"></div>
+    <div>© 2016 Biblioteca Pública Estadual | Desenvolvido por Fábio Onofre </div>
+</footer>
 
 
