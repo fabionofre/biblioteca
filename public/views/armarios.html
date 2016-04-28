@@ -6,7 +6,7 @@
                     <a ng-click="adicionarArmario();" class="botaoAdd btn btn-primary pull-right"><i class="fa fa-plus-square"></i></a>
                 </div>
                 <div class="panel-body row">
-                    <div ng-repeat="cabinet in cabinets">
+                    <div ng-repeat="cabinet in cabinets | filter:filtro">
                         <div class="col-md-1" style="margin-left: 5px;margin-top: 5px">
                            <a title="<%cabinet.title%>" ng-class="cabinet.classe" style="border-radius: 0px;" ng-click="abrirArmario(cabinet.id);"><%cabinet.id%></a>
                         </div>
@@ -15,20 +15,27 @@
             </div>
         </div>
         <div style="margin-top: 3%;"class="col-md-2">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="livres"> Livres
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="ocupados"> Ocupados
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="quebrados"> Quebrados
-                </label>
+            <div class="btn-group" data-toggle="buttons">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="livre" name="radioFiltro" ng-click="filtro='livre'" /> Livres
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="ocupado" name="radioFiltro" ng-click="filtro='ocupado'" /> Ocupados
+                    </label>
+                </div>
+                <div class="radio"> 
+                    <label>
+                        <input type="radio" id="quebrado" name="radioFiltro" ng-click="filtro='quebrado'" /> Quebrados
+                    </label>
+                </div>
+                <div class="radio"> 
+                    <label>
+                        <input type="radio" id="quebrado" name="radioFiltro" ng-click="filtro=''" checked="checked"/> Todos
+                    </label>
+                </div>
             </div>
         </div>
     </div>

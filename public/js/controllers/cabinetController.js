@@ -2,6 +2,8 @@
 angular.module('biblioteca')
 
 .controller('cabinetCtrl', function($scope, cabinetAPI, $uibModal) {
+    
+    $scope.filtro = '';
 	
 	var _carregarArmarios = function () {
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
@@ -42,13 +44,14 @@ angular.module('biblioteca')
         });
         
       modalInstance.result.then(function (retornoModal) {
-        if(retornoModal)
+        if(retornoModal){
             cabinet = {};
             cabinet.status = 3;
             cabinet.visitor_id = 1; 
             cabinetAPI.saveCabinet(cabinet).success(function(data) {
                 _carregarArmarios();
             })
+        }
       });
     };
         
