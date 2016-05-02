@@ -9,16 +9,23 @@ angular.module('biblioteca')
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
             $scope.cabinets.forEach(function(cabinet) {
-                if(cabinet.status == 'livre'){
-                    cabinet.classe = 'btn btn-success btn-large btn-block';
-                    cabinet.title = 'Armário livre';
-                }else if(cabinet.status == 'em_uso'){
+                if(cabinet.visitor_id && cabinet.visitor_id != 1){
                     cabinet.classe = 'btn btn-danger btn-large btn-block';
                     cabinet.title = 'Armário ocupado';
+                    cabinet.status = 'em_uso';
                 }else{
-                    cabinet.classe = 'btn btn-warning btn-large btn-block';
-                    cabinet.title = 'Armário quebrado';
-                }
+                  if(cabinet.status == 'livre' && cabinet.visitor_id == 1){
+                      cabinet.classe = 'btn btn-success btn-large btn-block';
+                      cabinet.title = 'Armário livre';
+                  }else if(cabinet.status == 'em_uso'){
+                      cabinet.classe = 'btn btn-danger btn-large btn-block';
+                      cabinet.title = 'Armário ocupado';
+                  }else{
+                      cabinet.classe = 'btn btn-warning btn-large btn-block';
+                      cabinet.title = 'Armário quebrado';
+                      cabinet.status = 'quebrado';
+                  }
+              }
             })
 		});
 	}
@@ -26,20 +33,36 @@ angular.module('biblioteca')
 	_carregarArmarios();
     
     $scope.abrirArmario = function(id){
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/modalArmario.html',
-            controller: 'modalArmarioCtrl',
-            resolve: {
-                armarioId: function(){
-                    return id;
-                }
-            }
-        });
+      cabinetAPI.buscarCabinet(id).success(function(data){
+        if(data.visitor_id != 1){
+          var modalInstance = $uibModal.open({
+              templateUrl: 'views/modais/modalArmario.html',
+              controller: 'modalArmarioCtrl',
+              resolve: {
+                  armario: function(){
+                      return data;
+                  }
+              }
+          });
+        }else{
+          var modalInstance = $uibModal.open({
+              templateUrl: 'views/modais/emprestarArmario.html',
+              controller: 'modalEmprestarArmarioCtrl',
+              resolve: {
+                  armario: function(){
+                      return data;
+                  }
+              }
+          });
+        }
+      });
+        
+          
     }
 
     $scope.adicionarArmario = function(){
       var modalInstance = $uibModal.open({
-            templateUrl: 'views/modalAddArmario.html',
+            templateUrl: 'views/modais/modalAddArmario.html',
             controller: 'modalAddArmarioCtrl',
         });
         
@@ -57,13 +80,17 @@ angular.module('biblioteca')
         
 })
 
-.controller('modalArmarioCtrl', function($scope, $uibModalInstance, armarioId, cabinetAPI){
+.controller('modalArmarioCtrl', function($scope, $uibModalInstance, armario, cabinetAPI, visitorAPI){
    
-   $scope.armarioId = armarioId;
-   
-   cabinetAPI.buscarCabinet(armarioId).success(function(data){
-       console.log(data); 
-   });
+   $scope.cabinet = armario;
+
+
+   visitorAPI.buscaVisitor($scope.cabinet.visitor_id).success(function(data){
+      $scope.visitor = data;
+    });
+
+
+
    
    $scope.ok = function () {
     $uibModalInstance.close();
@@ -85,4 +112,18 @@ angular.module('biblioteca')
     $uibModalInstance.close(false);
   };
    
+})
+
+.controller('modalEmprestarArmarioCtrl', function($scope, $uibModalInstance, armario){
+
+  $scope.cabinet = armario;
+  
+  $scope.ok = function (){
+    $uibModalInstance.close(true);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.close(false);
+  };
+
 });

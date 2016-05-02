@@ -44,8 +44,8 @@ class CabinetController extends Controller
 	 * @return Response
 	 */
 	public function update($id, Request $request) {
-		$Cabinet = User::find($id);
-		// $Cabinet->'campoASerEditado' = $request['campo']; EXEMPLO
+		$Cabinet = Cabinet::find($id);
+		$Cabinet->status = $request['status'];
 		$Cabinet->save();
  
 		return $Cabinet;

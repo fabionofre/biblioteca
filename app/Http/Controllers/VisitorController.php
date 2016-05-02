@@ -1,14 +1,14 @@
 <?php
-//Controlador que persiste os dados da tabela users.
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\User;
-//use Request;
 
-class UsuarioController extends Controller
+use App\Visitor;
+
+class VisitorController extends Controller
 {
     /**
 	 * Método GET
@@ -17,8 +17,8 @@ class UsuarioController extends Controller
 	 */
 	public function index() {
  
-		$User = User::all();
-		return $User;
+		$Visitor = Visitor::all();
+		return $Visitor;
 	}
  
 	/**
@@ -28,8 +28,8 @@ class UsuarioController extends Controller
 	 */
 	public function store(Request $request) {
 		$request['password'] = bcrypt($request['password']);
-		$User = User::create($request->all());
-		return $User;
+		$Visitor = Visitor::create($request->all());
+		return $Visitor;
 	}
  
 	/**
@@ -39,11 +39,11 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function update($id, Request $request) {
-		$User = User::find($id);
+		$Visitor = Visitor::find($id);
 		// $User->'campoASerEditado' = $request['campo']; EXEMPLO
-		$User->save();
+		$Visitor->save();
  
-		return $User;
+		return $Visitor;
 	}
  
 	/**
@@ -53,16 +53,15 @@ class UsuarioController extends Controller
 	 * @return Response
 	 */
 	public function destroy($id) {
-		$User = User::find($id);
-		$User->status = 0;
-		$User->save();
+		$Visitor = Visitor::find($id);
+		$Visitor->status = 0;
+		$Visitor->save();
 
-		return $User;
+		return $Visitor;
 	}
 
 	public function show($id) {
-		$User = User::find($id);
-		return $User;
+		$Visitor = Visitor::find($id);
+		return $Visitor;
 	}
- 
 }

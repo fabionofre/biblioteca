@@ -10,6 +10,10 @@ angular.module('biblioteca')
 		return $http.get(config.baseUrl + '/Usuario');
 	}
 
+	this.buscaUsuario = function(id){
+		return $http.get(config.baseUrl + '/Usuario/'+id);
+	}
+
 	this.deletarUsuario = function(id){
 		return $http.delete(config.baseUrl + '/Usuario/' + id);
 	}

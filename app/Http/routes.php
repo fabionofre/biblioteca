@@ -45,6 +45,7 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::resource('api/v1.0/Usuario', 'UsuarioController');
 Route::resource('api/v1.0/Cabinet', 'CabinetController');
+Route::resource('api/v1.0/Visitor', 'VisitorController');
 
 
 Route::group(['middleware' => ['web', 'auth.admin']], function() {

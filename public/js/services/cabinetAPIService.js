@@ -13,5 +13,9 @@ angular.module('biblioteca')
 	this.buscarCabinet = function(id){
 		return $http.get(config.baseUrl + '/Cabinet/' + id);
 	}
+
+	this.editarCabinet = function(id, cabinet){
+		return $http.put(config.baseUrl + '/Cabinet/'+id, cabinet);
+	}
 	
 });
