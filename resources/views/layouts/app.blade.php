@@ -73,9 +73,11 @@
         </div>
     </nav>
 
-
-        
-    <div ng-view></div>
+    @if(Auth::guest())
+        @yield('content')
+    @else
+        <div ng-view></div>
+    @endif
 
 </body>
 <footer>

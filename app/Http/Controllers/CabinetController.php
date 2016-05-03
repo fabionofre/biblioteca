@@ -10,8 +10,11 @@ use App\Cabinet;
 
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Auth;
+
 class CabinetController extends Controller
-{
+{	
+	
     /**
 	 * Método GET
 	 *
@@ -29,12 +32,15 @@ class CabinetController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-        $cabinet = $request->all();
-        date_default_timezone_set('America/Sao_Paulo');
-		$data_hora = date('Y-m-d H:i');
-        $cabinet['data_hora'] = $data_hora;
-		$Cabinet = Cabinet::create($cabinet);
-		return $Cabinet;
+		$usuario = Auth::user();
+		if($usuario->tipo != 'admin'){
+	        $cabinet = $request->all();
+	        date_default_timezone_set('America/Sao_Paulo');
+			$data_hora = date('Y-m-d H:i');
+	        $cabinet['data_hora'] = $data_hora;
+			$Cabinet = Cabinet::create($cabinet);
+			return $Cabinet;
+		}
 	}
  
 	/**
@@ -46,6 +52,7 @@ class CabinetController extends Controller
 	public function update($id, Request $request) {
 		$Cabinet = Cabinet::find($id);
 		$Cabinet->status = $request['status'];
+		$Cabinet->visitor_id = $request['visitor_id'];
 		$Cabinet->save();
  
 		return $Cabinet;

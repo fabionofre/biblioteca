@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
-class AutenticarUsuario
+use Illuminate\Support\Facades\Auth;
+
+class AutenticarVisitante
 {
     /**
      * Handle an incoming request.
@@ -15,11 +16,10 @@ class AutenticarUsuario
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-
-        $usuario = Auth::user();
-        if(!$usuario || $usuario->tipo != 'admin')
+    {       
+            $usuario = Auth::user();
+            if($usuario && ($usuario->tipo == 'admin' || $usuario->tipo == 'atd'))
+                return $next($request);
             return Redirect('/welcome');
-        return $next($request);
     }
 }

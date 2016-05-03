@@ -44,6 +44,16 @@ angular.module('biblioteca')
                   }
               }
           });
+
+           modalInstance.result.then(function (cabinet) {
+            if(cabinet){
+              cabinet.visitor_id = 1;
+              cabinet.status = 'livre';
+              cabinetAPI.editarCabinet(cabinet.id, cabinet).success(function(data, status){
+                _carregarArmarios();
+              })
+            }   
+           });
         }else{
           var modalInstance = $uibModal.open({
               templateUrl: 'views/modais/emprestarArmario.html',
@@ -53,6 +63,15 @@ angular.module('biblioteca')
                       return data;
                   }
               }
+          });
+          modalInstance.result.then(function (cabinet) {
+            if(cabinet){
+              cabinet.visitor_id = 2;//receber este valor do formulário;
+              cabinet.status = 'em_uso';
+              cabinetAPI.editarCabinet(cabinet.id, cabinet).success(function(){
+                  _carregarArmarios();
+              })
+            }
           });
         }
       });
@@ -92,11 +111,11 @@ angular.module('biblioteca')
 
 
    
-   $scope.ok = function () {
-    $uibModalInstance.close();
+   $scope.liberar = function () {
+    $uibModalInstance.close($scope.cabinet);
    };
 
-  $scope.cancel = function () {
+  $scope.cancelar = function () {
     $uibModalInstance.dismiss('cancel');
   };
    
@@ -118,11 +137,11 @@ angular.module('biblioteca')
 
   $scope.cabinet = armario;
   
-  $scope.ok = function (){
-    $uibModalInstance.close(true);
+  $scope.emprestar = function (){
+    $uibModalInstance.close($scope.cabinet);
   };
 
-  $scope.cancel = function () {
+  $scope.cancelar = function () {
     $uibModalInstance.close(false);
   };
 
