@@ -33,14 +33,17 @@ class CabinetController extends Controller
 	 */
 	public function store(Request $request) {
 		$usuario = Auth::user();
-		if($usuario->tipo != 'admin'){
+		if($usuario->tipo == 'admin'){
 	        $cabinet = $request->all();
 	        date_default_timezone_set('America/Sao_Paulo');
 			$data_hora = date('Y-m-d H:i');
 	        $cabinet['data_hora'] = $data_hora;
 			$Cabinet = Cabinet::create($cabinet);
 			return $Cabinet;
-		}
+		}	
+			$error['error'] = true;
+			$error['msg'] = 'Você não tem permissão para criar armários';
+			return $error;
 	}
  
 	/**

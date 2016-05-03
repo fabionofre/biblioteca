@@ -91,7 +91,10 @@ angular.module('biblioteca')
             cabinet.status = 3;
             cabinet.visitor_id = 1; 
             cabinetAPI.saveCabinet(cabinet).success(function(data) {
-                _carregarArmarios();
+                if(!data.error)
+                  _carregarArmarios();
+                else
+                  alert('Você não tem permissão para criar armários!');
             })
         }
       });
