@@ -16,5 +16,9 @@ angular.module('biblioteca')
 	this.deletarVisitor = function(id){
 		return $http.delete(config.baseUrl + '/Visitor/' + id);
 	}
+
+	this.paginaVisitor = function(url){
+		return $http.get('/paginaVisitor'+url);
+	}
 	
 });

@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+
+
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -27,6 +30,17 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+});
+
+Route::get('/paginaVisitor', function (Request $request) {
+ 
+    //Filtro
+    $limit = $request->get('limit', 5);
+ 
+    //Order
+    $filtro = $request->get('filtro', "");
+ 
+    return \App\Visitor::where('name', 'like', $filtro)->orWhere('cpf', 'like', $filtro)->paginate($limit);
 });
 
 Route::group(['middleware' => 'web'], function () {

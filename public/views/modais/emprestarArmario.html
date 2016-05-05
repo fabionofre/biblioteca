@@ -7,7 +7,7 @@
             <div class="col-md-12 column">
                 <form class="form-horizontal">
                     <div class="form-group modal-form-group">
-                        <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisa</label>
+                        <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisar Visitante</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" ng-model="pesquisa"/>
                         </div>
@@ -25,8 +25,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="visitante in visitantes | filter:pesqVisitante | limitTo:itensPagina" ng-click="clickVisitante(visitante)">
-                            <td style="text-align: center"><%visitante.name%></td>
+                        <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
+                            <td style="text-align: center"><i class=""></i><%visitante.name%></td>
                             <td style="text-align: center"><%visitante.cpf%></td>
                             <td style="text-align: center"><%visitante.phone%></td>
                             <td style="text-align: center"><%visitante.dataNascimento%></td>
@@ -34,7 +34,7 @@
                     </tbody>
                 </table>
                 <h5 ng-show="!mostrarTabela && botaoApertado" style="text-align: center;">Nenhum visitante encontrado!</h5>
-                <uib-pagination total-items="qItens" ng-show="mostrarTabela" ng-model="pagina" max-size="tamMaximo" items-per-page="itensPagina" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="pesquisaVisitante()" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
+                <uib-pagination total-items="total" ng-show="mostrarTabela" ng-model="consulta.page" max-size="5" items-per-page="consulta.limit" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="onChange(consulta.page, consulta.limit)" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
             </div>
             <div ng-show="preLoader" class="col-md-12 column"><img src="COLOCA O GIF AQUI"></div>
         </div>

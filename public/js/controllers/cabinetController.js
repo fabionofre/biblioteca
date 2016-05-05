@@ -117,7 +117,7 @@ angular.module('biblioteca')
     $uibModalInstance.close($scope.cabinet);
    };
 
-  $scope.cancelar = function () {
+  $scope.cancelar = function () { 
     $uibModalInstance.dismiss('cancel');
   };
    
@@ -138,21 +138,40 @@ angular.module('biblioteca')
 .controller('modalEmprestarArmarioCtrl', function($scope, $uibModalInstance, armario, visitorAPI){
 
   $scope.cabinet = armario;
+  $scope.visitantes = {};
+
+  $scope.consulta = {
+    order: 'name',
+    limit: 5,
+    page: 1
+  };
+
+   $scope.onChange = function (page, limit) {
+      $scope.consulta.page = page;
+      $scope.consulta.limit = limit;
+      return $scope.pesquisaVisitante();
+    };
 
   $scope.pesquisaVisitante = function(){
+    url = '?page='+$scope.consulta.page;
+    url += '&limit='+$scope.consulta.limit;
+    url += '&order='+$scope.consulta.order;
+    url += '&filtro='+$scope.pesquisa+'%';
     $scope.botaoApertado = true;
-    visitorAPI.buscarVisitors().success(function(data){
-      $scope.pesqVisitante = $scope.pesquisa;
-      $scope.visitantes = data;
-      $scope.qItens = $scope.visitantes.length;
-      $scope.itensPagina = 5;
-      $scope.tamMaximo = 5;
-      $scope.progress = false;
-      if($scope.visitantes.length == 0)
+    visitorAPI.paginaVisitor(url).success(function(data){
+      console.log(data);
+      $scope.total = data.total;
+      $scope.visitantes = data.data;
+      if(data.total == 0)
         $scope.mostrarTabela = false;
       else
         $scope.mostrarTabela = true;
     })
+
+  }
+
+  $scope.clickVisitante = function(visitante){
+    console.log(visitante);
   }
   
   $scope.emprestar = function (){

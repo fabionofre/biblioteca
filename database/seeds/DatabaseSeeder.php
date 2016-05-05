@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
             'status' => 3,
             'visitor_id' => 1
         ]);*/
-        for($i = 0; $i < 100; ++$i){
+        for($i = 0; $i < 20; ++$i){
             Visitor::create([
-                'name' => 'Visitor'+$i,
-                'cpf' => '2839139133'+$i,
+                'name' => 'Fábio',
+                'cpf' => '2176331'+$i,
                 'rg' => '2321313',
                 'phone'=> '9976873',
                 'status' => 1,
