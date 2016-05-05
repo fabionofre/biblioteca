@@ -19,23 +19,25 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserTableSeeder::class);
         date_default_timezone_set('America/Sao_Paulo');
 		$date = date('Y-m-d H:i');
-        Cabinet::create([
+       /* Cabinet::create([
         	'data_hora' => $date,
             'status' => 3,
             'visitor_id' => 1
-        ]);
-        /*Visitor::create([
-            'name' => 'Fábio',
-            'cpf' => '2839139131',
-            'rg' => '2321313',
-            'phone'=> '9976873',
-            'status' => 1,
-            'rua' => 'Rio de Janeiro',
-            'numero' => '123',
-            'cep' => '6990000',
-            'bairro' => 'kappa',
-            'cidade_id' => 1
         ]);*/
+        for($i = 0; $i < 100; ++$i){
+            Visitor::create([
+                'name' => 'Visitor'+$i,
+                'cpf' => '2839139133'+$i,
+                'rg' => '2321313',
+                'phone'=> '9976873',
+                'status' => 1,
+                'rua' => 'Rio de Janeiro',
+                'numero' => '123',
+                'cep' => '6990000',
+                'bairro' => 'kappa',
+                'cidade_id' => 1
+            ]);
+        }
     }
 
 }

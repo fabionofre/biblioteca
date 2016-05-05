@@ -105,8 +105,7 @@ angular.module('biblioteca')
 .controller('modalArmarioCtrl', function($scope, $uibModalInstance, armario, cabinetAPI, visitorAPI){
    
    $scope.cabinet = armario;
-
-
+   
    visitorAPI.buscaVisitor($scope.cabinet.visitor_id).success(function(data){
       $scope.visitor = data;
     });
@@ -136,9 +135,25 @@ angular.module('biblioteca')
    
 })
 
-.controller('modalEmprestarArmarioCtrl', function($scope, $uibModalInstance, armario){
+.controller('modalEmprestarArmarioCtrl', function($scope, $uibModalInstance, armario, visitorAPI){
 
   $scope.cabinet = armario;
+
+  $scope.pesquisaVisitante = function(){
+    $scope.botaoApertado = true;
+    visitorAPI.buscarVisitors().success(function(data){
+      $scope.pesqVisitante = $scope.pesquisa;
+      $scope.visitantes = data;
+      $scope.qItens = $scope.visitantes.length;
+      $scope.itensPagina = 5;
+      $scope.tamMaximo = 5;
+      $scope.progress = false;
+      if($scope.visitantes.length == 0)
+        $scope.mostrarTabela = false;
+      else
+        $scope.mostrarTabela = true;
+    })
+  }
   
   $scope.emprestar = function (){
     $uibModalInstance.close($scope.cabinet);
@@ -147,5 +162,9 @@ angular.module('biblioteca')
   $scope.cancelar = function () {
     $uibModalInstance.close(false);
   };
+
+  $scope.clickVisitante = function(visitante) {
+    console.log(visitante);
+  }
 
 });
