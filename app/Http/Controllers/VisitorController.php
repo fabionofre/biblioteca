@@ -27,7 +27,6 @@ class VisitorController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		$request['password'] = bcrypt($request['password']);
 		$Visitor = Visitor::create($request->all());
 		return $Visitor;
 	}

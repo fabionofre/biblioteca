@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" ng-click="cancelar();"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-    <h3 class="modal-title">Armário Ocupado - <%cabinet.id%></h3>
+    <h3 class="modal-title">Armário Livre - <%cabinet.id%></h3>
 </div>
 <div class="modal-body">
 	<div>
@@ -11,6 +11,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-success" type="button" ng-click="liberar()">Liberar</button>
+    <button class="btn btn-success" type="button" ng-click="emprestar()">Emprestar</button>
     <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
 </div>

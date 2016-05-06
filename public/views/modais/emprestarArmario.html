@@ -1,46 +1,46 @@
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" ng-click="cancelar();"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-        <h3 id="modalTitle" class="modal-title">Emprestar Armário - <%cabinet.id%></h3>
-    </div>
-    <div id="modalBody" class="modal-body">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <form class="form-horizontal">
-                    <div class="form-group modal-form-group">
-                        <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisar Visitante</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" ng-model="pesquisa"/>
-                        </div>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="cancelar();"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+    <h3 id="modalTitle" class="modal-title">Emprestar Armário - <%cabinet.id%></h3>
+</div>
+<div id="modalBody" class="modal-body">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form class="form-horizontal">
+                <div class="form-group modal-form-group">
+                    <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisar Visitante</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="pesquisa"/>
                     </div>
-                </form>
-            </div>
-            <div class="col-sm-12">
-                <table ng-show="mostrarTabela" class="table table-condensed table-hover">
-                    <thead>
-                        <tr>
-                            <th style="text-align: center">Nome</th>
-                            <th style="text-align: center">CPF</th>
-                            <th style="text-align: center">Telefone</th>
-                            <th style="text-align: center">Nascimento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
-                            <td style="text-align: center"><i class=""></i><%visitante.name%></td>
-                            <td style="text-align: center"><%visitante.cpf%></td>
-                            <td style="text-align: center"><%visitante.phone%></td>
-                            <td style="text-align: center"><%visitante.dataNascimento%></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h5 ng-show="!mostrarTabela && botaoApertado" style="text-align: center;">Nenhum visitante encontrado!</h5>
-                <uib-pagination total-items="total" ng-show="mostrarTabela" ng-model="consulta.page" max-size="5" items-per-page="consulta.limit" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="onChange(consulta.page, consulta.limit)" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
-            </div>
-            <div ng-show="preLoader" class="col-md-12 column"><img src="COLOCA O GIF AQUI"></div>
+                </div>
+            </form>
         </div>
+        <div class="col-sm-12">
+            <table ng-show="mostrarTabela" class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">Nome</th>
+                        <th style="text-align: center">CPF</th>
+                        <th style="text-align: center">Telefone</th>
+                        <th style="text-align: center">Nascimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
+                        <td style="text-align: center"><%visitante.name%></td>
+                        <td style="text-align: center"><%visitante.cpf%></td>
+                        <td style="text-align: center"><%visitante.phone%></td>
+                        <td style="text-align: center"><%visitante.dataNascimento%></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 ng-show="!mostrarTabela && botaoApertado" style="text-align: center;">Nenhum visitante encontrado!</h5>
+            <uib-pagination total-items="total" ng-show="mostrarTabela" ng-model="consulta.page" max-size="5" items-per-page="consulta.limit" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="onChange(consulta.page, consulta.limit)" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
+        </div>
+        <div ng-show="preLoader" class="col-md-12 column"><img src="COLOCA O GIF AQUI"></div>
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
-        <button class="btn btn-info" type="button" ng-click="cadastraVisitante()" ng-show="true">Cadastrar Visitante</button>
-        <button class="btn btn-primary" type="button" ng-click="pesquisaVisitante();">Procurar Visitante</button>
-    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="pesquisaVisitante();">Procurar Visitante</button>
+    <button ng-show="!mostrarTabela && botaoApertado" class="btn btn-info" type="button" ng-click="cadastrarVisitante()">Cadastrar Visitante</button>
+    <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
+</div>

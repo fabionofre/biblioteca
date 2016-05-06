@@ -64,13 +64,9 @@ angular.module('biblioteca')
                   }
               }
           });
-          modalInstance.result.then(function (cabinet) {
-            if(cabinet){
-              cabinet.visitor_id = 2;//receber este valor do formulário;
-              cabinet.status = 'em_uso';
-              cabinetAPI.editarCabinet(cabinet.id, cabinet).success(function(){
-                  _carregarArmarios();
-              })
+          modalInstance.result.then(function (retornoModal) {
+            if(retornoModal){
+              _carregarArmarios();
             }
           });
         }
@@ -129,16 +125,17 @@ angular.module('biblioteca')
     $uibModalInstance.close(true);
    };
 
-  $scope.cancel = function () {
+  $scope.cancelar = function () {
     $uibModalInstance.close(false);
   };
    
 })
 
-.controller('modalEmprestarArmarioCtrl', function($scope, $uibModalInstance, armario, visitorAPI){
+.controller('modalEmprestarArmarioCtrl', function($scope, $uibModal, $uibModalInstance, armario, visitorAPI){
 
   $scope.cabinet = armario;
   $scope.visitantes = {};
+  $scope.mostrarTabela = false;
 
   $scope.consulta = {
     order: 'name',
@@ -171,9 +168,47 @@ angular.module('biblioteca')
   }
 
   $scope.clickVisitante = function(visitante){
-    console.log(visitante);
+    var modalInstance = $uibModal.open({
+      templateUrl: 'views/modais/confirmarEmprestimo.html',
+      controller: 'confirmarEmprestimoCtrl',
+      resolve: {
+          visitante: function(){
+            return visitante;
+          },
+          armario : function(){
+            return $scope.cabinet;
+          }
+      }
+    });
+
+     modalInstance.result.then(function (retornoModal) {
+          if(retornoModal)
+            $uibModalInstance.close(true);  
+     });
   }
-  
+
+  $scope.cadastrarVisitante = function(visitante){
+    var modalInstance = $uibModal.open({
+      templateUrl: 'views/modais/cadastrarVisitante.html',
+      controller: 'cadastrarVisitanteCtrl'
+    });
+
+     modalInstance.result.then(function (visitante) {
+      if(visitante){
+        visitante.status = 1;
+        visitante.bairro = 'Hello';
+        visitante.cep = '982174812';
+        visitante.numero = '124'
+        visitante.rua = 'Rola';
+        visitante.cidade_id = 1;
+        console.log(visitante);
+        visitorAPI.saveVisitor(visitante).success(function(data){
+          console.log(data);
+        })
+      }
+    });
+  }
+
   $scope.emprestar = function (){
     $uibModalInstance.close($scope.cabinet);
   };
@@ -182,8 +217,33 @@ angular.module('biblioteca')
     $uibModalInstance.close(false);
   };
 
-  $scope.clickVisitante = function(visitante) {
-    console.log(visitante);
+})
+
+.controller('confirmarEmprestimoCtrl', function($scope, $http, $uibModalInstance, visitante, armario, cabinetAPI){
+  $scope.visitor = visitante;
+  $scope.cabinet = armario;
+  $scope.cabinet.visitor_id = $scope.visitor.id;
+
+  $scope.emprestar = function(){
+    cabinetAPI.editarCabinet($scope.cabinet.id, $scope.cabinet).success(function(data){
+      console.log(data);
+      $uibModalInstance.close(true);
+    })
   }
 
-});
+  $scope.cancelar = function(){
+    $uibModalInstance.close(false);
+  }
+})
+
+.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance){ 
+
+  $scope.confirmarCadastro = function(){
+    $uibModalInstance.close($scope.visitante);
+  }
+
+  $scope.cancelar = function(){
+    $uibModalInstance.dismiss('cancel');
+  }
+
+})
