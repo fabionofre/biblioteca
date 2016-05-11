@@ -40,7 +40,7 @@ Route::get('/paginaVisitor', function (Request $request) {
     //Order
     $filtro = $request->get('filtro', "");
  
-    return \App\Visitor::where('status = 1', 'and', 'name', 'like', $filtro)->orWhere('cpf', 'like', $filtro)->paginate($limit);
+    return \App\Visitor::where('name', 'like', $filtro)->where('status', '=', '1')->orWhere('cpf', 'like', $filtro)->where('status', '=', '1')->paginate($limit);
 });
 
 Route::group(['middleware' => 'web'], function () {

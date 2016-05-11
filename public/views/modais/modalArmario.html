@@ -3,11 +3,19 @@
     <h3 class="modal-title">Armário Ocupado - <%cabinet.id%></h3>
 </div>
 <div class="modal-body">
-	<div>
-    	<h4><b>Nome do visitante</b></h4> <%visitor.name%>
-    </div>
-    <div>
-    	<h4><b>Telefone do visitante</b></h4> <%visitor.phone%>
+    <div class="row">
+    	<div class="col-md-6">
+        	<h4><b>Nome</b></h4> <%visitor.name%>
+        </div>
+        <div class="col-md-6">
+            <h4><b>CPF</b></h4> <%visitor.cpf%>
+        </div>
+        <div class="col-md-6">
+            <h4><b>Telefone</b></h4> <%visitor.phone%>
+        </div>
+        <div class="col-md-6">
+        	<h4><b>Data de Nascimento</b></h4> <%visitor.data_nascimento%>
+        </div>
     </div>
 </div>
 <div class="modal-footer">

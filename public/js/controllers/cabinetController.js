@@ -9,19 +9,19 @@ angular.module('biblioteca')
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
             $scope.cabinets.forEach(function(cabinet) {
-                if(cabinet.visitor_id && cabinet.visitor_id != 1){
-                    cabinet.classe = 'btn btn-danger btn-large btn-block';
+                if(cabinet.visitor_id && cabinet.visitor_id != null){
+                    cabinet.classe = 'btn btn-danger btn-md btn-block';
                     cabinet.title = 'Armário ocupado';
                     cabinet.status = 'em_uso';
                 }else{
-                  if(cabinet.status == 'livre' && cabinet.visitor_id == 1){
-                      cabinet.classe = 'btn btn-success btn-large btn-block';
+                  if(cabinet.status == 'livre' && cabinet.visitor_id == null){
+                      cabinet.classe = 'btn btn-success btn-md btn-block';
                       cabinet.title = 'Armário livre';
                   }else if(cabinet.status == 'em_uso'){
-                      cabinet.classe = 'btn btn-danger btn-large btn-block';
+                      cabinet.classe = 'btn btn-danger btn-md btn-block';
                       cabinet.title = 'Armário ocupado';
                   }else{
-                      cabinet.classe = 'btn btn-warning btn-large btn-block';
+                      cabinet.classe = 'btn btn-warning btn-md btn-block';
                       cabinet.title = 'Armário quebrado';
                       cabinet.status = 'quebrado';
                   }
@@ -34,7 +34,7 @@ angular.module('biblioteca')
     
     $scope.abrirArmario = function(id){
       cabinetAPI.buscarCabinet(id).success(function(data){
-        if(data.visitor_id != 1){
+        if(data.visitor_id != null){
           var modalInstance = $uibModal.open({
               templateUrl: 'views/modais/modalArmario.html',
               controller: 'modalArmarioCtrl',
@@ -47,7 +47,7 @@ angular.module('biblioteca')
 
            modalInstance.result.then(function (cabinet) {
             if(cabinet){
-              cabinet.visitor_id = 1;
+              cabinet.visitor_id = null;
               cabinet.status = 'livre';
               cabinetAPI.editarCabinet(cabinet.id, cabinet).success(function(data, status){
                 _carregarArmarios();
@@ -85,7 +85,7 @@ angular.module('biblioteca')
         if(retornoModal){
             cabinet = {};
             cabinet.status = 3;
-            cabinet.visitor_id = 1; 
+            cabinet.visitor_id = null; 
             cabinetAPI.saveCabinet(cabinet).success(function(data) {
                 if(!data.error)
                   _carregarArmarios();
@@ -196,10 +196,6 @@ angular.module('biblioteca')
      modalInstance.result.then(function (visitante) {
       if(visitante){
         visitante.status = 1;
-        visitante.bairro = 'Hello';
-        visitante.cep = '982174812';
-        visitante.numero = '124'
-        visitante.rua = 'Rola';
         visitante.cidade_id = 1;
         console.log(visitante);
         visitorAPI.saveVisitor(visitante).success(function(data){
@@ -228,6 +224,9 @@ angular.module('biblioteca')
     cabinetAPI.editarCabinet($scope.cabinet.id, $scope.cabinet).success(function(data){
       console.log(data);
       $uibModalInstance.close(true);
+    }).error(function(){
+      $uibModalInstance.close(false);
+      alert("O visitante "+$scope.visitor.name+" já possui uma chave");
     })
   }
 

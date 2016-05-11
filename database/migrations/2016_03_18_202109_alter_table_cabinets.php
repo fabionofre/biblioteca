@@ -12,9 +12,13 @@ class AlterTableCabinets extends Migration
      */
     public function up()
     {
-        Schema::table('cabinets', function (Blueprint $table) {
-            $table->dropColumn(['em_uso', 'quebrado']);
+        Schema::create('cabinets', function (Blueprint $table) {
+            $table->increments('id');
+            $table->dateTime('data_hora');
             $table->enum('status', ['em_uso', 'quebrado', 'livre']);
+            $table->integer('visitor_id')->unsigned()->nullable()->unique();
+            $table->foreign('visitor_id')->references('id')->on('visitors');
+            $table->timestamps();
         });
     }
 
@@ -25,10 +29,6 @@ class AlterTableCabinets extends Migration
      */
     public function down()
     {
-        Schema::table('cabinets', function(Blueprint $table){
-            $table->boolean('em_uso');
-            $table->boolean('quebrado');
-            $table->dropColumn('status');
-        });
+       Schema::drop('cabinets');
     }
 }

@@ -7,7 +7,7 @@
                 </div>
                 <div class="panel-body row">
                     <div ng-repeat="cabinet in cabinets | filter:filtro">
-                        <div class="col-md-1" style="margin-left: 5px;margin-top: 5px">
+                        <div class="col-md-1" style="margin-left: 10px;margin-top: 5px">
                            <a title="<%cabinet.title%>" ng-class="cabinet.classe" style="border-radius: 0px;" ng-click="abrirArmario(cabinet.id);"><%cabinet.id%></a>
                         </div>
                     </div>

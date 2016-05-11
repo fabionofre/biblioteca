@@ -17,8 +17,12 @@ angular.module('biblioteca')
 		return $http.delete(config.baseUrl + '/Visitor/' + id);
 	}
 
+	this.editarVisitor = function(visitor){
+		return $http.put(config.baseUrl + '/Visitor/'+visitor.id, visitor);
+	}
+	
 	this.paginaVisitor = function(url){
 		return $http.get('/paginaVisitor'+url);
 	}
-	
+
 });
