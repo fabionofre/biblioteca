@@ -14,8 +14,13 @@
             <form class="form-horizontal">
                 <div class="form-group modal-form-group">
                     <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisar Visitante</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="pesquisa"/>
+                    <div class="row col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="pesquisa">
+                                <span class="input-group-addon">
+                                    <button class="fa fa-search" ng-click="pesquisaVisitante();" style="background:transparent;border:none"></button>
+                                </span>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -46,7 +51,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="pesquisaVisitante();">Procurar Visitante</button>
     <button ng-show="!mostrarTabela && botaoApertado" class="btn btn-info" type="button" ng-click="cadastrarVisitante()">Cadastrar Visitante</button>
     <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
 </div>

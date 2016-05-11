@@ -90,6 +90,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <script src="js/ui-bootstrap-1.2.4.min.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.2.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/angular-locale_pt-br.js"></script>
+    <script src="js/angular-input-masks.br.js"></script>
+    <script src="js/angular-br-filters.js"></script>
 <!-- Módulo AngularJS -->
     <script src="js/app.js"></script>
 <!-- Configs AngularJS -->

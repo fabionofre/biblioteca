@@ -9,12 +9,12 @@ angular.module('biblioteca')
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
             $scope.cabinets.forEach(function(cabinet) {
-                if(cabinet.visitor_id && cabinet.visitor_id != null){
+                if(cabinet.visitor_id){
                     cabinet.classe = 'btn btn-danger btn-md btn-block';
                     cabinet.title = 'Armário ocupado';
                     cabinet.status = 'em_uso';
                 }else{
-                  if(cabinet.status == 'livre' && cabinet.visitor_id == null){
+                  if(cabinet.status == 'livre'){
                       cabinet.classe = 'btn btn-success btn-md btn-block';
                       cabinet.title = 'Armário livre';
                   }else if(cabinet.status == 'em_uso'){
@@ -187,19 +187,23 @@ angular.module('biblioteca')
      });
   }
 
-  $scope.cadastrarVisitante = function(visitante){
+  $scope.cadastrarVisitante = function(){
     var modalInstance = $uibModal.open({
       templateUrl: 'views/modais/cadastrarVisitante.html',
-      controller: 'cadastrarVisitanteCtrl'
+      controller: 'cadastrarVisitanteCtrl',
+      resolve: {
+        armario : function(){
+          return armario;
+        }
+      }
     });
 
      modalInstance.result.then(function (visitante) {
       if(visitante){
         visitante.status = 1;
         visitante.cidade_id = 1;
-        console.log(visitante);
         visitorAPI.saveVisitor(visitante).success(function(data){
-          console.log(data);
+          
         })
       }
     });
@@ -235,10 +239,11 @@ angular.module('biblioteca')
   }
 })
 
-.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance){ 
+.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance, armario){ 
 
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
+    console.log($scope.visitante);
   }
 
   $scope.cancelar = function(){
