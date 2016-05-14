@@ -25,4 +25,8 @@ angular.module('biblioteca')
 		return $http.get('/paginaVisitor'+url);
 	}
 
+	this.consultaCep = function(cep){
+		return $http.get('https://viacep.com.br/ws/'+cep+'/json/ ');
+	}
+
 });

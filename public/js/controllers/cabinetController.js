@@ -201,7 +201,6 @@ angular.module('biblioteca')
      modalInstance.result.then(function (visitante) {
       if(visitante){
         visitante.status = 1;
-        visitante.cidade_id = 1;
         visitorAPI.saveVisitor(visitante).success(function(data){
           
         })
@@ -238,15 +237,20 @@ angular.module('biblioteca')
   }
 })
 
-.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance, armario){ 
+.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance, armario, visitorAPI){ 
 
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
-    /*var dataNasc = $scope.visitante.data_nascimento;
-    var dia = dataNasc.getDate();
-    var mes = dataNasc.getMonth();
-    var ano = dataNasc.getFullYear();
-    $scope.visitante.data_nascimento = dia + '/' + (++mes) + '/' + ano;*/
+  }
+
+  $scope.consultaCep = function(){
+    visitorAPI.consultaCep($scope.visitante.cep).success(function(data){
+      $scope.visitante.rua = data.logradouro;
+      $scope.visitante.bairro = data.bairro;
+      $scope.visitante.cidade = data.localidade;
+      $scope.visitante.estado = data.uf;
+      $scope.mostraEndereco = true;
+    })
   }
 
   $scope.cancelar = function(){

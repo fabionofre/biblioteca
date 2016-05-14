@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Visitor;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class VisitorController extends Controller
 {
@@ -28,6 +30,7 @@ class VisitorController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
+		$request['user_id'] = Auth::user()->id;
 		$Visitor = Visitor::create($request->all());
 		return $Visitor;
 	}
