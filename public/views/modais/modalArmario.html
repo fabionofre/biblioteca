@@ -8,13 +8,13 @@
         	<h4><b>Nome</b></h4> <%visitor.name%>
         </div>
         <div class="col-md-6">
-            <h4><b>CPF</b></h4> <%visitor.cpf%>
+            <h4><b>CPF</b></h4> <%visitor.cpf | brCpf%>
         </div>
         <div class="col-md-6">
-            <h4><b>Telefone</b></h4> <%visitor.phone%>
+            <h4><b>Telefone</b></h4> <%visitor.phone | brPhoneNumber%>
         </div>
         <div class="col-md-6">
-        	<h4><b>Data de Nascimento</b></h4> <%visitor.data_nascimento%>
+        	<h4><b>Data de Nascimento</b></h4> <%visitor.data_nascimento | date:'dd/MM/yyyy'%>
         </div>
     </div>
 </div>

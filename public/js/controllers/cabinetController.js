@@ -3,8 +3,8 @@ angular.module('biblioteca')
 
 .controller('cabinetCtrl', function($scope, cabinetAPI, $uibModal) {
     
-    $scope.filtro = '';
-	
+  $scope.filtro = '';
+
 	var _carregarArmarios = function () {
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
@@ -226,7 +226,6 @@ angular.module('biblioteca')
 
   $scope.emprestar = function(){
     cabinetAPI.editarCabinet($scope.cabinet.id, $scope.cabinet).success(function(data){
-      console.log(data);
       $uibModalInstance.close(true);
     }).error(function(){
       $uibModalInstance.close(false);
@@ -243,7 +242,11 @@ angular.module('biblioteca')
 
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
-    console.log($scope.visitante);
+    /*var dataNasc = $scope.visitante.data_nascimento;
+    var dia = dataNasc.getDate();
+    var mes = dataNasc.getMonth();
+    var ano = dataNasc.getFullYear();
+    $scope.visitante.data_nascimento = dia + '/' + (++mes) + '/' + ano;*/
   }
 
   $scope.cancelar = function(){

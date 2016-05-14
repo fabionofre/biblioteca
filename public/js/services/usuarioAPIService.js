@@ -17,5 +17,5 @@ angular.module('biblioteca')
 	this.deletarUsuario = function(id){
 		return $http.delete(config.baseUrl + '/Usuario/' + id);
 	}
-	
+
 });

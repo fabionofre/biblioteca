@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 //use Request;
 
 class UsuarioController extends Controller
@@ -63,6 +64,10 @@ class UsuarioController extends Controller
 	public function show($id) {
 		$User = User::find($id);
 		return $User;
+	}
+
+	public function pegaTipo(){
+    	return Auth::user();
 	}
  
 }

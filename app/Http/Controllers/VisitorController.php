@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Visitor;
 
+
 class VisitorController extends Controller
 {
     /**
@@ -63,4 +64,5 @@ class VisitorController extends Controller
 		$Visitor = Visitor::find($id);
 		return $Visitor;
 	}
+
 }
