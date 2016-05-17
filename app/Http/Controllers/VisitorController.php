@@ -43,7 +43,17 @@ class VisitorController extends Controller
 	 */
 	public function update($id, Request $request) {
 		$Visitor = Visitor::find($id);
-		// $User->'campoASerEditado' = $request['campo']; EXEMPLO
+		$Visitor->name = $request['name'];
+		$Visitor->cpf = $request['cpf'];
+		$Visitor->rg = $request['rg'];
+		$Visitor->phone = $request['phone'];
+		$Visitor->rua = $request['rua'];
+		$Visitor->numero = $request['numero'];
+		$Visitor->cep = $request['cep'];
+		$Visitor->bairro = $request['bairro'];
+		$Visitor->data_nascimento = $request['data_nascimento'];
+		$Visitor->cidade = $request['cidade'];
+		$Visitor->estado = $request['estado'];
 		$Visitor->save();
  
 		return $Visitor;
@@ -57,7 +67,7 @@ class VisitorController extends Controller
 	 */
 	public function destroy($id) {
 		$Visitor = Visitor::find($id);
-		$Visitor->status = 0;
+		$Visitor->status = !$Visitor->status;//Se estiver ativo, desativa o visitante. Se desativado, ativa.
 		$Visitor->save();
 
 		return $Visitor;

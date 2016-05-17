@@ -32,19 +32,6 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::get('/paginaVisitor', function (Request $request) {
- 
-    //Limite
-    $limit = $request->get('limit', 5);
- 
-    //Order
-    $order = $request->get('order', 'name');
-
-    //Filtro
-    $filtro = $request->get('filtro', "");
- 
-    return \App\Visitor::where('name', 'like', $filtro)->where('status', '=', '1')->orWhere('cpf', 'like', $filtro)->where('status', '=', '1')->orderBy($order)->paginate($limit);
-});
 
 Route::group(['middleware' => 'web'], function () {
    Route::auth();
@@ -70,6 +57,30 @@ Route::group(['middleware' => ['web', 'auth.admin']], function() {
 
 Route::group(['middleware' => ['web', 'auth.visitante']], function() {
 	Route::resource('api/v1.0/Visitor', 'VisitorController');
+  Route::get('/paginaVisitor', function (Request $request) {
+ 
+    //Limite
+    $limit = $request->get('limit', 5);
+ 
+    //Order
+    $order = $request->get('order', 'name');
+
+    //Filtro
+    $filtro = $request->get('filtro', "");
+
+    //Ativo
+    $ativo = $request->get('ativos', '1');
+    
+    
+    if($ativo){
+      //Realiza a paginação apenas com visitantes ativos
+      return \App\Visitor::where('name', 'like', $filtro)->where('status', '=', '1')->orWhere('cpf', 'like', $filtro)->where('status', '=', '1')->orderBy($order)->paginate($limit);
+    }else{
+      //Realiza a paginação com todos os visitantes, inclusive os inativos
+      return \App\Visitor::where('name', 'like', $filtro)->orWhere('cpf', 'like', $filtro)->orderBy('status', 'desc')->orderBy($order)->paginate($limit);
+    }
+
+});
 });
 
 Route::group(['middleware' => ['web', 'auth.armario']], function() {

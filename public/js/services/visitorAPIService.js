@@ -14,7 +14,7 @@ angular.module('biblioteca')
 	}
 
 	this.deletarVisitor = function(id){
-		return $http.delete(config.baseUrl + '/Visitor/' + id);
+		return $http.delete(config.baseUrl + '/Visitor/' + id);//Não deleta, muda status do visitante.
 	}
 
 	this.editarVisitor = function(visitor){

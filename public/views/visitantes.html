@@ -1,3 +1,9 @@
+<style type="text/css">
+.table-hover > tbody > tr:hover {
+    background-color: #C0C0C0;
+    cursor: pointer;
+}
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-9 col-md-offset-1">
@@ -29,17 +35,17 @@
                                     <th style="text-align: center">RG</th>
                                     <th style="text-align: center">Telefone</th>
                                     <th style="text-align: center">Nascimento</th>
-                                    <th style="text-align: center">Ação</th>
+                                    <th style="text-align: center" ng-click="ordenaAcao=!ordenaAcao">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
-                                    <td style="text-align: center"><%visitante.name%></td>
-                                    <td style="text-align: center"><%visitante.cpf | brCpf%></td>
-                                    <td style="text-align: center"><%visitante.rg%></td>
-                                    <td style="text-align: center"><%visitante.phone | brPhoneNumber%></td>
-                                    <td style="text-align: center"><%visitante.data_nascimento | date:'dd/MM/yyyy'%></td>
-                                    <td></td>
+                                <tr ng-repeat="visitante in visitantes">
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.name%></td>
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.cpf | brCpf%></td>
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.rg%></td>
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.phone | brPhoneNumber%></td>
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.data_nascimento | date:'dd/MM/yyyy'%></td>
+                                    <td title="<%visitante.title%>" class="<%visitante.classe%> pull-right" ng-click="desativarVisitante(visitante.id)"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,5 +56,21 @@
                 </div>
             </div>
         </div>
+        <!--
+        <div style="margin-top: 7%;"class="col-md-2">
+            <div class="btn-group" data-toggle="buttons">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="livre" name="radioFiltro" ng-click="" /> Ativos
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="ocupado" name="radioFiltro" ng-click="" /> Bloqueados
+                    </label>
+                </div>
+            </div>
+        </div>
+        -->
     </div>
 </div>

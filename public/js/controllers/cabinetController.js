@@ -152,6 +152,7 @@ angular.module('biblioteca')
 
   $scope.pesquisaVisitante = function(){
     url = '?page='+$scope.consulta.page;
+    url += '&ativos=1';
     url += '&limit='+$scope.consulta.limit;
     url += '&order='+$scope.consulta.order;
     url += '&filtro='+$scope.pesquisa+'%';
@@ -214,7 +215,7 @@ angular.module('biblioteca')
 
 })
 
-.controller('confirmarEmprestimoCtrl', function($scope, $http, $uibModalInstance, visitante, armario, cabinetAPI){
+.controller('confirmarEmprestimoCtrl', function($scope, $uibModalInstance, visitante, armario, cabinetAPI){
   $scope.visitor = visitante;
   $scope.cabinet = armario;
   $scope.cabinet.visitor_id = $scope.visitor.id;
