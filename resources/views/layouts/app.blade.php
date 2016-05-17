@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Biblioteca Pública Estadual do Estado do Acre</title>
+    <title>Biblioteca Pública Estadual do Acre</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -52,7 +52,11 @@
                     @else
                     <li><a href="/#/armarios">Armários</a></li>
                     @if (Auth::user()->tipo == 'admin')
-                    <li><a href="#/registrar">Cadastrar</a></li>
+                    <li><a href="#/registrar">Cadastrar Usuário</a></li>
+                    @else
+                    @if(Auth::user()->tipo == 'atd')
+                    <li><a href="#/visitantes">Visitantes</a></li>
+                    @endif
                     @endif
                     @endif
                 </ul>
@@ -83,7 +87,7 @@
 </body>
 <footer>
     <div class="col-md-4"></div>
-    <div>© 2016 Biblioteca Pública Estadual do estado do Acre | Desenvolvido por Fábio Onofre </div>
+    <div>© 2016 Biblioteca Pública Estadual do Acre | Desenvolvido por Fábio Onofre </div>
 </footer>
 <!-- Dependências -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
@@ -106,6 +110,7 @@
     <script src="js/controllers/usuarioController.js"></script>
     <script src="js/services/usuarioAPIService.js"></script>
 <!-- Controlador e serviços dos visitantes -->
+    <script src="js/controllers/visitorController.js"></script>
     <script src="js/services/visitorAPIService.js"></script>
 </html>
 

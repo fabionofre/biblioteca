@@ -19,17 +19,12 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserTableSeeder::class);
         date_default_timezone_set('America/Sao_Paulo');
 		$date = date('Y-m-d H:i');
-       /* Cabinet::create([
-        	'data_hora' => $date,
-            'status' => 3,
-            'visitor_id' => 1
-        ]);*/
-        for($i = 1; $i <= 90; ++$i){
+        /*for($i = 1; $i <= 90; ++$i){
            Cabinet::create([
                 'data_hora' => $date,
                 'status' => 3
             ]);
-        }
+        }*/
     }
 
 }

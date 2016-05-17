@@ -58,6 +58,7 @@ angular.module('biblioteca')
           var modalInstance = $uibModal.open({
               templateUrl: 'views/modais/emprestarArmario.html',
               controller: 'modalEmprestarArmarioCtrl',
+              size: 'lg',
               resolve: {
                   armario: function(){
                       return data;
@@ -190,12 +191,7 @@ angular.module('biblioteca')
   $scope.cadastrarVisitante = function(){
     var modalInstance = $uibModal.open({
       templateUrl: 'views/modais/cadastrarVisitante.html',
-      controller: 'cadastrarVisitanteCtrl',
-      resolve: {
-        armario : function(){
-          return armario;
-        }
-      }
+      controller: 'cadastrarVisitanteCtrl'//Este controlador está no arquivo visitorController.js
     });
 
      modalInstance.result.then(function (visitante) {
@@ -235,26 +231,4 @@ angular.module('biblioteca')
   $scope.cancelar = function(){
     $uibModalInstance.close(false);
   }
-})
-
-.controller('cadastrarVisitanteCtrl', function($scope, $http, $uibModalInstance, armario, visitorAPI){ 
-
-  $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitante);
-  }
-
-  $scope.consultaCep = function(){
-    visitorAPI.consultaCep($scope.visitante.cep).success(function(data){
-      $scope.visitante.rua = data.logradouro;
-      $scope.visitante.bairro = data.bairro;
-      $scope.visitante.cidade = data.localidade;
-      $scope.visitante.estado = data.uf;
-      $scope.mostraEndereco = true;
-    })
-  }
-
-  $scope.cancelar = function(){
-    $uibModalInstance.dismiss('cancel');
-  }
-
 })

@@ -34,13 +34,16 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/paginaVisitor', function (Request $request) {
  
-    //Filtro
+    //Limite
     $limit = $request->get('limit', 5);
  
     //Order
+    $order = $request->get('order', 'name');
+
+    //Filtro
     $filtro = $request->get('filtro', "");
  
-    return \App\Visitor::where('name', 'like', $filtro)->where('status', '=', '1')->orWhere('cpf', 'like', $filtro)->where('status', '=', '1')->paginate($limit);
+    return \App\Visitor::where('name', 'like', $filtro)->where('status', '=', '1')->orWhere('cpf', 'like', $filtro)->where('status', '=', '1')->orderBy($order)->paginate($limit);
 });
 
 Route::group(['middleware' => 'web'], function () {

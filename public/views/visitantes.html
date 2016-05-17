@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4"><h4>Visitantes</h4></div>
+                            <form>
+                                <label for="nome" class="control-label" style="text-align: left;"></label>
+                                <div class="row col-sm-5">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="pesquisa">
+                                            <span class="input-group-addon">
+                                                <button class="fa fa-search" ng-click="pesquisaVisitante();" style="background:transparent;border:none"></button>
+                                            </span>
+                                    </div>
+                                </div>
+                                <a ng-click="adicionarVisitante();" class="botaoAdd btn btn-default btn-lg pull-right" style="margin-right: 20px;"><i class="fa fa-plus"></i></a>
+                            </form>
+                    </div>
+                </div>
+                <div class="panel-body row">
+                    <div class="col-sm-12">
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center">Nome</th>
+                                    <th style="text-align: center">CPF</th>
+                                    <th style="text-align: center">RG</th>
+                                    <th style="text-align: center">Telefone</th>
+                                    <th style="text-align: center">Nascimento</th>
+                                    <th style="text-align: center">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
+                                    <td style="text-align: center"><%visitante.name%></td>
+                                    <td style="text-align: center"><%visitante.cpf | brCpf%></td>
+                                    <td style="text-align: center"><%visitante.rg%></td>
+                                    <td style="text-align: center"><%visitante.phone | brPhoneNumber%></td>
+                                    <td style="text-align: center"><%visitante.data_nascimento | date:'dd/MM/yyyy'%></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5 ng-show="nenhumVisitante" style="text-align: center;">Nenhum visitante encontrado!</h5>
+                        <div class="col-md-4"></div>
+                        <uib-pagination total-items="total" ng-model="consulta.page" max-size="5" items-per-page="consulta.limit" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="onChange(consulta.page, consulta.limit)" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
