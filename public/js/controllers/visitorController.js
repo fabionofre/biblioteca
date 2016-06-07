@@ -58,7 +58,7 @@ angular.module('biblioteca')
       if(visitante){
         visitante.status = 1;
         visitorAPI.saveVisitor(visitante).success(function(data){
-          
+          $scope.pesquisaVisitante();
         })
       }
     });
@@ -100,7 +100,7 @@ angular.module('biblioteca')
 
 })
 
-.controller('cadastrarVisitanteCtrl', function($scope, $uibModalInstance, visitorAPI){ 
+.controller('cadastrarVisitanteCtrl', function($scope, $uibModalInstance, visitorAPI){
 
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
@@ -127,6 +127,13 @@ angular.module('biblioteca')
   $scope.visitante = visitante;
   $scope.mostraEndereco = true;
 
+  console.log($scope.visitante.sexo);
+  
+  if($scope.visitante.sexo == "F")
+    $scope.feminino = true;
+  else
+    $scope.feminino = false;
+
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
   }
@@ -143,5 +150,30 @@ angular.module('biblioteca')
       $scope.visitante.estado = data.uf;
     })
   }
+
+})
+
+.controller('passarDadosCtrl', function($scope, visitorAPI, $http){
+
+  $http.get('/api/v1.0/oldVisitor').success(function(data){
+    $scope.oldVisitor = data;
+    $scope.oldVisitor.forEach(function(v){
+    $scope.visitante = {};
+    $scope.visitante.name = v.name;
+    $scope.visitante.cpf = v.cpf.replace(/\.|-/g, "");
+    $scope.visitante.rg = v.rg;
+    $scope.visitante.phone = v.phone.replace(/\(|\)|-/g, "");
+    $scope.visitante.status = v.status;
+    visitorAPI.saveVisitor($scope.visitante).success(function(data){
+
+    })
+  });
+  })
+
+  // $scope.teste = "(68)9203-8448";
+  // remove = /\(|\)|-/g;
+  // console.log($scope.teste);
+  // $scope.teste2 = $scope.teste.replace(/\(|\)|-/g, "");
+  // console.log($scope.teste2); 
 
 })

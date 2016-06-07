@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="visitante in visitantes">
-                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.name%></td>
+                                    <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.name | uppercase%></td>
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.cpf | brCpf%></td>
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.rg%></td>
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.phone | brPhoneNumber%></td>

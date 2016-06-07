@@ -32,6 +32,9 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
+Route::resource('api/v1.0/oldVisitor', 'oldVisitorController');
+Route::resource('api/v1.0/Visitor', 'VisitorController');
+
 
 Route::group(['middleware' => 'web'], function () {
    Route::auth();
@@ -56,7 +59,7 @@ Route::group(['middleware' => ['web', 'auth.admin']], function() {
 
 
 Route::group(['middleware' => ['web', 'auth.visitante']], function() {
-	Route::resource('api/v1.0/Visitor', 'VisitorController');
+	
   Route::get('/paginaVisitor', function (Request $request) {
  
     //Limite

@@ -5,81 +5,94 @@
 <div id="modalBody" class="modal-body">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <form class="form-horizontal">
+            <form name="visitanteForm" class="form-horizontal">
                 <div class="form-group modal-form-group">
                     <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Nome</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.name"/>
+                        <input type="text" class="form-control" style="text-transform: uppercase;" ng-model="visitante.name" ng-required="true"/>
+                    </div>
+                </div>
+                <div class="form-group modal-form-group">
+                    <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Sexo</label>
+                    <div class="btn-group" data-toggle="buttons">
+                        <div class="radio form-control col-sm-8">
+                            <label>
+                                <input type="radio" id="livre" name="radioFiltro" ng-checked="!feminino" ng-click="visitante.sexo=1" /> Masculino
+                            </label>
+                            <label>
+                                <input type="radio" id="ocupado" name="radioFiltro" ng-checked="feminino" ng-click="visitante.sexo=2" /> Feminino
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group modal-form-group">
                     <label class="col-sm-4 control-label" style="text-align: left;">Telefone</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control phone" ng-model="visitante.phone" ui-br-phone-number/>
+                        <input type="text" class="form-control phone" ng-model="visitante.phone" ui-br-phone-number ng-required="true"/>
                     </div>
                 </div>
                 <div class="form-group modal-form-group">
                     <label class="col-sm-4 control-label" style="text-align: left;">RG</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.rg"/>
+                        <input type="text" class="form-control" ng-model="visitante.rg" ng-required="true"/>
                     </div>
                 </div>
                 <div class="form-group modal-form-group">
                     <label class="col-sm-4 control-label" style="text-align: left;">CPF</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.cpf" ui-br-cpf-mask/>
+                        <input type="text" class="form-control" ng-model="visitante.cpf" ui-br-cpf-mask ng-required="true"/>
                     </div>
                 </div>
                 <div class="form-group modal-form-group">
                     <label class="col-sm-4 control-label" style="text-align: left;">Data de Nascimento</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.data_nascimento" ui-date-mask/>
+                        <input type="text" class="form-control" ng-model="visitante.data_nascimento" ui-date-mask ng-required="true"/>
                     </div>
                 </div>
                 <div class="form-group modal-form-group">
                     <label class="col-sm-4 control-label" style="text-align: left;">CEP</label>
                     <div class="input-group col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.cep" ui-br-cep-mask>
+                        <input type="text" class="form-control" ng-model="visitante.cep" ui-br-cep-mask ng-required="true">
                             <span class="input-group-addon">
                                 <button class="fa fa-search" ng-click="consultaCep();" style="background:transparent;border:none"></button>
                             </span>
                     </div>
                 </div>
                 <div ng-show="mostraEndereco">
-                <div class="form-group modal-form-group">
-                    <label class="col-sm-2 control-label" style="text-align: left;">Rua</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" ng-model="visitante.rua" disabled/>
+                    <div class="form-group modal-form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left;">Rua</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="visitante.rua" disabled ng-requierd="true"/>
+                        </div>
+                        <label class="col-sm-1 control-label" style="text-align: left;">Nº </label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" ng-model="visitante.numero" ng-required="true"/>
+                        </div>
                     </div>
-                    <label class="col-sm-1 control-label" style="text-align: left;">Nº </label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" ng-model="visitante.numero"/>
+                    <div class="form-group modal-form-group">
+                        <label class="col-sm-4 control-label" style="text-align: left;">Bairro</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="visitante.bairro" disabled ng-required="true"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group modal-form-group">
-                    <label class="col-sm-4 control-label" style="text-align: left;">Bairro</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.bairro" disabled/>
+                    <div class="form-group modal-form-group">
+                        <label class="col-sm-4 control-label" style="text-align: left;">Estado</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="visitante.estado" disabled ng-required="true"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group modal-form-group">
-                    <label class="col-sm-4 control-label" style="text-align: left;">Estado</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.estado" disabled/>
+                    <div class="form-group modal-form-group">
+                        <label class="col-sm-4 control-label" style="text-align: left;">Cidade</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="visitante.cidade" disabled ng-required="true"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group modal-form-group">
-                    <label class="col-sm-4 control-label" style="text-align: left;">Cidade</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="visitante.cidade" disabled/>
-                    </div>
-                </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-success" type="button" ng-click="confirmarCadastro()">Confirmar Cadastro</button>
+    <button class="btn btn-success" type="button" ng-click="confirmarCadastro()" ng-disabled="visitanteForm.$invalid">Confirmar Cadastro</button>
     <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
 </div>

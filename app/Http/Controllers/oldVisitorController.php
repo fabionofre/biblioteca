@@ -6,12 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Visitor;
+use App\oldVisitor;
 
-use Illuminate\Support\Facades\Auth;
-
-
-class VisitorController extends Controller
+class oldVisitorController extends Controller
 {
     /**
 	 * Método GET
@@ -20,7 +17,7 @@ class VisitorController extends Controller
 	 */
 	public function index() {
  
-		$Visitor = Visitor::all();
+		$Visitor = oldVisitor::all();
 		return $Visitor;
 	}
  
@@ -42,20 +39,6 @@ class VisitorController extends Controller
 	 * @return Response
 	 */
 	public function update($id, Request $request) {
-		$Visitor = Visitor::find($id);
-		$Visitor->name = $request['name'];
-		$Visitor->cpf = $request['cpf'];
-		$Visitor->rg = $request['rg'];
-		$Visitor->phone = $request['phone'];
-		$Visitor->rua = $request['rua'];
-		$Visitor->numero = $request['numero'];
-		$Visitor->cep = $request['cep'];
-		$Visitor->bairro = $request['bairro'];
-		$Visitor->data_nascimento = $request['data_nascimento'];
-		$Visitor->cidade = $request['cidade'];
-		$Visitor->estado = $request['estado'];
-		$Visitor->sexo = $request['sexo'];
-		$Visitor->save();
  
 		return $Visitor;
 	}

@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="visitante in visitantes" ng-click="clickVisitante(visitante)">
-                        <td style="text-align: center"><%visitante.name%></td>
+                        <td style="text-align: center"><%visitante.name | uppercase%></td>
                         <td style="text-align: center"><%visitante.cpf | brCpf%></td>
                         <td style="text-align: center"><%visitante.phone | brPhoneNumber%></td>
                         <td style="text-align: center"><%visitante.data_nascimento | date:'dd/MM/yyyy'%></td>
