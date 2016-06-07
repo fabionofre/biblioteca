@@ -107,7 +107,8 @@ angular.module('biblioteca')
   }
 
   $scope.consultaCep = function(){
-    visitorAPI.consultaCep($scope.visitante.cep).success(function(data){
+    url = '?cep='+$scope.visitante.cep;
+    visitorAPI.consultaCep(url).success(function(data){
       $scope.visitante.rua = data.logradouro;
       $scope.visitante.bairro = data.bairro;
       $scope.visitante.cidade = data.localidade;

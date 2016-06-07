@@ -26,7 +26,7 @@ angular.module('biblioteca')
 	}
 
 	this.consultaCep = function(cep){
-		return $http.get('https://viacep.com.br/ws/'+cep+'/json/ ');
+		return $http.get('/pegaCep'+cep);
 	}
 
 });

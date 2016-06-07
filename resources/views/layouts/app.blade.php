@@ -8,12 +8,16 @@
     <title>Biblioteca Pública Estadual do Acre</title>
 
     <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> -->
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome-4.6.1/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -90,8 +94,8 @@
     <div>© 2016 Biblioteca Pública Estadual do Acre | Desenvolvido por Fábio Onofre </div>
 </footer>
 <!-- Dependências -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+    <script src="js/angularJS.js"></script>
+    <script src="js/angular-route.js"></script>
     <script src="js/ui-bootstrap-1.2.4.min.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.2.min.js"></script>
     <script src="js/moment.js"></script>

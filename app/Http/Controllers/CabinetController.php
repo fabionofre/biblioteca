@@ -57,7 +57,7 @@ class CabinetController extends Controller
 		$Cabinet->status = $request['status'];
 		$Cabinet->visitor_id = $request['visitor_id'];
 		$Cabinet->save();
- 
+
 		return $Cabinet;
 	}
  

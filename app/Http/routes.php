@@ -83,6 +83,21 @@ Route::group(['middleware' => ['web', 'auth.visitante']], function() {
 });
 });
 
+Route::get('/pegaCep', function(Request $request){
+  $cep = $request->get('cep', 0);
+
+  $json_file = file_get_contents(
+     "https://viacep.com.br/ws/".$cep."/json/");
+
+  $json_str = json_decode($json_file, true);
+
+  $itens = $json_str;
+
+  return $itens;
+
+
+});
+
 Route::group(['middleware' => ['web', 'auth.armario']], function() {
 	Route::resource('api/v1.0/Cabinet', 'CabinetController');
 });

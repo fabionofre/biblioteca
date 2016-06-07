@@ -31,6 +31,8 @@ angular.module('biblioteca')
 	}
 
 	_carregarArmarios();
+
+  setInterval(_carregarArmarios, 5000);
     
     $scope.abrirArmario = function(id){
       cabinetAPI.buscarCabinet(id).success(function(data){
@@ -221,11 +223,17 @@ angular.module('biblioteca')
   $scope.cabinet.visitor_id = $scope.visitor.id;
 
   $scope.emprestar = function(){
-    cabinetAPI.editarCabinet($scope.cabinet.id, $scope.cabinet).success(function(data){
-      $uibModalInstance.close(true);
-    }).error(function(){
-      $uibModalInstance.close(false);
-      alert("O visitante "+$scope.visitor.name+" já possui uma chave");
+    cabinetAPI.buscarCabinet($scope.cabinet.id).success(function(data){
+      if(data.visitor_id){
+        alert("O armário " + $scope.cabinet.id + " já foi emprestado!");
+      }else{
+        cabinetAPI.editarCabinet($scope.cabinet.id, $scope.cabinet).success(function(data){
+          $uibModalInstance.close(true);
+        }).error(function(){
+          $uibModalInstance.close(false);
+          alert("O visitante "+$scope.visitor.name+" já possui uma chave");
+        })
+      }
     })
   }
 
