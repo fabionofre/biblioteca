@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::resource('api/v1.0/oldVisitor', 'oldVisitorController');
-Route::resource('api/v1.0/Visitor', 'VisitorController');
+Route::resource('api/v1.0/Visitor', 'VisitorController'); 
 
 
 Route::group(['middleware' => 'web'], function () {
@@ -84,6 +84,11 @@ Route::group(['middleware' => ['web', 'auth.visitante']], function() {
     }
 
 });
+});
+
+Route::get('/paginaVelho', function(Request $request){
+  $limit = 500;
+  return \App\oldVisitor::where('status', '=', '1')->paginate($limit);
 });
 
 Route::get('/pegaCep', function(Request $request){

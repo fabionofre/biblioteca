@@ -30,8 +30,13 @@ class VisitorController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		$request['user_id'] = Auth::user()->id;
-		$Visitor = Visitor::create($request->all());
+		// $request['user_id'] = Auth::user()->id;
+		$visitor['name'] = $request['name'];
+		$visitor['cpf'] = $request['cpf'];
+		$visitor['rg'] = $request['rg'];
+		$visitor['phone'] = $request['phone'];
+		$visitor['user_id'] = 1;
+		$Visitor = Visitor::create($visitor);
 		return $Visitor;
 	}
  

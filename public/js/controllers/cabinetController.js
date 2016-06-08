@@ -5,34 +5,62 @@ angular.module('biblioteca')
     
   $scope.filtro = '';
 
+  $scope.numArmarios = 90;
+
+  var _armariosOcupados;
+  var _armariosLivres;
+  var _armariosQuebrados;
+  var _todosArmarios;
+
 	var _carregarArmarios = function () {
 		cabinetAPI.buscarCabinets().success(function(data, status, headers, config) {
 			$scope.cabinets = data;
+          _armariosOcupados = 0;
+          _armariosLivres = 0;
+          _armariosQuebrados = 0;
+          _todosArmarios = 0;
             $scope.cabinets.forEach(function(cabinet) {
                 if(cabinet.visitor_id){
                     cabinet.classe = 'btn btn-danger btn-md btn-block';
                     cabinet.title = 'Armário ocupado';
                     cabinet.status = 'em_uso';
+                    _armariosOcupados++;
                 }else{
                   if(cabinet.status == 'livre'){
                       cabinet.classe = 'btn btn-success btn-md btn-block';
                       cabinet.title = 'Armário livre';
+                      _armariosLivres++;
                   }else if(cabinet.status == 'em_uso'){
                       cabinet.classe = 'btn btn-danger btn-md btn-block';
                       cabinet.title = 'Armário ocupado';
+                      _armariosOcupados++;
                   }else{
                       cabinet.classe = 'btn btn-warning btn-md btn-block';
                       cabinet.title = 'Armário quebrado';
                       cabinet.status = 'quebrado';
+                      _armariosQuebrados++;
                   }
               }
+              _todosArmarios++;
             })
 		});
 	}
 
 	_carregarArmarios();
 
-  setInterval(_carregarArmarios, 5000);
+  setInterval(_carregarArmarios, 3000);
+
+  $scope.funcFiltro = function(filtro){
+    $scope.filtro = filtro;
+    if(filtro == 'livre')
+      $scope.numArmarios = _armariosLivres;
+    else if(filtro == 'ocupado')
+      $scope.numArmarios = _armariosOcupados;
+    else if(filtro == 'quebrado')
+      $scope.numArmarios = _armariosQuebrados;
+    else
+      $scope.numArmarios = _todosArmarios;
+  }
     
     $scope.abrirArmario = function(id){
       cabinetAPI.buscarCabinet(id).success(function(data){
@@ -134,7 +162,7 @@ angular.module('biblioteca')
    
 })
 
-.controller('modalEmprestarArmarioCtrl', function($scope, $uibModal, $uibModalInstance, armario, visitorAPI){
+.controller('modalEmprestarArmarioCtrl', function($scope, $uibModal, $uibModalInstance, armario, visitorAPI, cabinetAPI){
 
   $scope.cabinet = armario;
   $scope.visitantes = {};
@@ -154,7 +182,7 @@ angular.module('biblioteca')
 
   $scope.pesquisaVisitante = function(){
     url = '?page='+$scope.consulta.page;
-    url += '&ativos=1';
+    url += '&ativos=0';
     url += '&limit='+$scope.consulta.limit;
     url += '&order='+$scope.consulta.order;
     url += '&filtro='+$scope.pesquisa+'%';
@@ -172,23 +200,61 @@ angular.module('biblioteca')
   }
 
   $scope.clickVisitante = function(visitante){
-    var modalInstance = $uibModal.open({
-      templateUrl: 'views/modais/confirmarEmprestimo.html',
-      controller: 'confirmarEmprestimoCtrl',
-      resolve: {
+    if(visitante.status == 2){
+      var modalInstance = $uibModal.open({
+        templateUrl: 'views/modais/cadastrarVisitante.html',
+        controller: 'editarVisitanteCtrl',//Este controlador está no arquivo visitorController.js
+        resolve: {
           visitante: function(){
             return visitante;
-          },
-          armario : function(){
-            return $scope.cabinet;
           }
-      }
-    });
+        }
+      });
 
-     modalInstance.result.then(function (retornoModal) {
-          if(retornoModal)
-            $uibModalInstance.close(true);  
-     });
+      modalInstance.result.then(function (visitante) {
+        if(visitante){
+          visitorAPI.editarVisitor(visitante).success(function(data){
+            console.log(data);
+            var modalInstance = $uibModal.open({
+              templateUrl: 'views/modais/confirmarEmprestimo.html',
+              controller: 'confirmarEmprestimoCtrl',
+              resolve: {
+                  visitante: function(){
+                    return visitante;
+                  },
+                  armario : function(){
+                    return $scope.cabinet;
+                  }
+              }
+            });
+
+           modalInstance.result.then(function (retornoModal) {
+                if(retornoModal)
+                  $uibModalInstance.close(true);  
+           });
+          })
+        }
+      });
+
+    }else{
+      var modalInstance = $uibModal.open({
+        templateUrl: 'views/modais/confirmarEmprestimo.html',
+        controller: 'confirmarEmprestimoCtrl',
+        resolve: {
+            visitante: function(){
+              return visitante;
+            },
+            armario : function(){
+              return $scope.cabinet;
+            }
+        }
+      });
+
+         modalInstance.result.then(function (retornoModal) {
+              if(retornoModal)
+                $uibModalInstance.close(true);  
+         });
+    }
   }
 
   $scope.cadastrarVisitante = function(){
@@ -214,6 +280,14 @@ angular.module('biblioteca')
   $scope.cancelar = function () {
     $uibModalInstance.close(false);
   };
+
+   $scope.quebrar = function(cabinet){
+    cabinet.status = 'quebrado';
+    cabinet.visitor_id = null;
+    cabinetAPI.editarCabinet(cabinet.id, cabinet).success(function(data){
+      $uibModalInstance.close(true);
+    })
+  }
 
 })
 
