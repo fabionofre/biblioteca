@@ -64,7 +64,7 @@ angular.module('biblioteca')
     
     $scope.abrirArmario = function(id){
       cabinetAPI.buscarCabinet(id).success(function(data){
-        if(data.visitor_id != null){
+        if(data.visitor_id != null && data.status != 'quebrado'){
           var modalInstance = $uibModal.open({
               templateUrl: 'views/modais/modalArmario.html',
               controller: 'modalArmarioCtrl',
@@ -84,7 +84,7 @@ angular.module('biblioteca')
               })
             }   
            });
-        }else{
+        }else if(data.status != 'quebrado'){
           var modalInstance = $uibModal.open({
               templateUrl: 'views/modais/emprestarArmario.html',
               controller: 'modalEmprestarArmarioCtrl',
@@ -100,6 +100,8 @@ angular.module('biblioteca')
               _carregarArmarios();
             }
           });
+        }else{
+          alert("Impossível emprestar armário quebrado!");
         }
       });
         
@@ -213,6 +215,7 @@ angular.module('biblioteca')
 
       modalInstance.result.then(function (visitante) {
         if(visitante){
+          visitante.status = 1;
           visitorAPI.editarVisitor(visitante).success(function(data){
             console.log(data);
             var modalInstance = $uibModal.open({

@@ -60,6 +60,7 @@ class VisitorController extends Controller
 		$Visitor->cidade = $request['cidade'];
 		$Visitor->estado = $request['estado'];
 		$Visitor->sexo = $request['sexo'];
+		$Visitor->status = $request['status'];
 		$Visitor->save();
  
 		return $Visitor;

@@ -17,8 +17,6 @@ class AlterVisitorsTable extends Migration
             $table->string('numero', 10);
             $table->string('cep', 12);
             $table->string('bairro', 60);
-            $table->integer('cidade_id')->unsigned();
-            $table->foreign('cidade_id')->references('id')->on('cities');
         });
     }
 

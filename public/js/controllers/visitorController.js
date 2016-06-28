@@ -126,8 +126,6 @@ angular.module('biblioteca')
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
   $scope.visitante = visitante;
   $scope.mostraEndereco = true;
-
-  console.log($scope.visitante.sexo);
   
   if($scope.visitante.sexo == "F")
     $scope.feminino = true;
@@ -142,8 +140,9 @@ angular.module('biblioteca')
     $uibModalInstance.dismiss('cancel');
   }
 
-    $scope.consultaCep = function(){
-    visitorAPI.consultaCep($scope.visitante.cep).success(function(data){
+  $scope.consultaCep = function(){
+    url = '?cep='+$scope.visitante.cep;
+    visitorAPI.consultaCep(url).success(function(data){
       $scope.visitante.rua = data.logradouro;
       $scope.visitante.bairro = data.bairro;
       $scope.visitante.cidade = data.localidade;
