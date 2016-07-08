@@ -19,10 +19,14 @@ angular.module('biblioteca')
             .when("/inicio", {
                 templateUrl: "views/welcome.html"
         })
-            .when("/passar", {
+            .when("/entrada", {
+                templateUrl: "views/entrada.html",
+                controller: "entradaCtrl"
+            })
+            /*.when("/passar", {
                 templateUrl: "views/passarDadosVisitante.html",
                 controller: "passarDadosCtrl"
-        })
+        })*/
             $routeProvider.otherwise({
                 redirectTo: "/inicio"
             })

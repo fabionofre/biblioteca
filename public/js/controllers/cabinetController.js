@@ -318,3 +318,137 @@ angular.module('biblioteca')
     $uibModalInstance.close(false);
   }
 })
+
+// Medida provisória para o guarda volumes - INICIO
+
+.controller('entradaCtrl', function($scope, $uibModal){
+
+    $scope.guardarVolume = function(){
+        var modalInstance = $uibModal.open({
+          templateUrl: 'views/modais/emprestarArmario.html',
+          controller: 'modalGuardarVolumeCtrl',
+          size: 'lg'
+        });
+    }
+
+})
+
+.controller('modalGuardarVolumeCtrl', function($scope, $uibModal, $uibModalInstance, visitorAPI, cabinetAPI, $http){
+
+  fluxo = {};
+  fluxo.num_visitantes = 0;
+
+  $http.post('api/v1.0/Fluxo', fluxo).success(function(data){
+    console.log(data);
+  });
+
+
+  $scope.visitantes = {};
+  $scope.mostrarTabela = false;
+
+  $scope.consulta = {
+    order: 'name',
+    limit: 5,
+    page: 1
+  };
+
+   $scope.onChange = function (page, limit) {
+      $scope.consulta.page = page;
+      $scope.consulta.limit = limit;
+      return $scope.pesquisaVisitante();
+    };
+
+  $scope.pesquisaVisitante = function(){
+    url = '?page='+$scope.consulta.page;
+    url += '&ativos=0';
+    url += '&limit='+$scope.consulta.limit;
+    url += '&order='+$scope.consulta.order;
+    url += '&filtro='+$scope.pesquisa+'%';
+    $scope.botaoApertado = true;
+    visitorAPI.paginaVisitor(url).success(function(data){
+      console.log(data);
+      $scope.total = data.total;
+      $scope.visitantes = data.data;
+      if(data.total == 0)
+        $scope.mostrarTabela = false;
+      else
+        $scope.mostrarTabela = true;
+    })
+
+  }
+
+  $scope.clickVisitante = function(visitante){
+    abrirSegundoModal = false;
+    if(visitante.status == 2){
+      var modalInstance = $uibModal.open({
+        templateUrl: 'views/modais/cadastrarVisitante.html',
+        controller: 'editarVisitanteCtrl',//Este controlador está no arquivo visitorController.js
+        resolve: {
+          visitante: function(){
+            return visitante;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (visitante) {
+        if(visitante){
+          visitante.status = 1;
+          visitorAPI.editarVisitor(visitante).success(function(data){
+            console.log(data);
+            abrirSegundoModal = true;
+          })
+        }
+      });
+
+    }
+      if(abrirSegundoModal || visitante.status != 2){
+        var modalInstance = $uibModal.open({
+          templateUrl: 'views/modais/confirmarEntrada.html',
+          controller: 'confirmarEntradaCtrl',
+          resolve: {
+              visitante: function(){
+                return visitante;
+            } 
+          }
+        });
+      }
+    
+  }
+
+  $scope.cancelar = function () {
+    $uibModalInstance.close(false);
+  };
+
+})
+
+
+.controller('confirmarEntradaCtrl', function($scope, $uibModalInstance, visitante, cabinetAPI){
+  $scope.visitor = visitante;
+
+  var _contVisitante;
+
+  $scope.imprimir = function(){
+      
+      _contVisitante++;
+
+      var data = new Date();
+
+      var janela = window.open('about:blank');
+      janela.document.write("************************<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>* Biblioteca Pública do Estado do Acre *<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>************************<BR>&nbsp&nbsp&nbsp&nbsp"+  data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds()+"<BR><BR>Nome:<BR>&nbsp&nbsp&nbsp&nbsp"+$scope.visitor.name+"<BR>Telefone:<BR>&nbsp&nbsp"+$scope.visitor.phone+"<BR>Visitante Nº:<BR>&nbsp&nbsp"+_contVisitante+"<BR>************************");
+      janela.window.print();
+      janela.window.print();
+      janela.window.close();
+
+  }
+
+  $scope.registrarEntrada = function(){
+    _contVisitante++;
+    $uibModalInstance.close(false);
+  }
+
+  $scope.cancelar = function(){
+    $uibModalInstance.close(false);
+  }
+})
+
+// Medida provisória para o guarda volumes - FIM 

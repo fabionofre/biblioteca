@@ -54,7 +54,8 @@
                 <ul class="nav navbar-nav">
                     @if(Auth::guest())
                     @else
-                    <li><a href="/#/armarios">Armários</a></li>
+                    <!--<li><a href="/#/armarios">Armários</a></li> -->
+                    <li><a href="/#/entrada">Entrada</a></li>
                     @if (Auth::user()->tipo == 'admin')
                     <li><a href="#/registrar">Cadastrar Usuário</a></li>
                     @else

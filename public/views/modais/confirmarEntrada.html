@@ -1,0 +1,17 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" ng-click="cancelar();"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+    <h3 class="modal-title">Informações do Visitante</h3>
+</div>
+<div class="modal-body">
+	<div>
+    	<h4><b>Nome do visitante</b></h4> <%visitor.name | uppercase%>
+    </div>
+    <div>
+    	<h4><b>Telefone do visitante</b></h4> <%visitor.phone | brPhoneNumber%>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" type="button" ng-click="imprimir()">Guardar Volume</button>
+    <button class="btn btn-primary" type="button" ng-click="registrarEntrada()">Registrar Entrada</button>
+    <button class="btn btn-danger" type="button" ng-click="cancelar()">Cancelar</button>
+</div>

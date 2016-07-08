@@ -45,7 +45,7 @@
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.rg%></td>
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.phone | brPhoneNumber%></td>
                                     <td style="text-align: center" ng-click="clickVisitante(visitante)"><%visitante.data_nascimento | date:'dd/MM/yyyy'%></td>
-                                    <td title="<%visitante.title%>" class="<%visitante.classe%> pull-right" ng-click="desativarVisitante(visitante.id)"></td>
+                                    <td title="<%visitante.title%>" class="<%visitante.classe%> pull-right" ng-click="desativarVisitante(visitante)"></td>
                                 </tr>
                             </tbody>
                         </table>

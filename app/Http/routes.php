@@ -108,4 +108,5 @@ Route::get('/pegaCep', function(Request $request){
 
 Route::group(['middleware' => ['web', 'auth.armario']], function() {
 	Route::resource('api/v1.0/Cabinet', 'CabinetController');
+  Route::resource('api/v1.0/Fluxo', 'FluxoController');
 });
