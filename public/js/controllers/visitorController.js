@@ -127,6 +127,7 @@ angular.module('biblioteca')
 .controller('cadastrarVisitanteCtrl', function($scope, $uibModalInstance, visitorAPI){
 
   $scope.mostraEndereco = false;
+  $scope.visitante = {};
   $scope.visitante.sexo = 1;
 
   $scope.confirmarCadastro = function(){
