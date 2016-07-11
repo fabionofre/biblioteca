@@ -43,7 +43,7 @@ class VisitorController extends Controller
 		$visitor['cidade'] = $request['cidade'];
 		$visitor['estado'] = $request['estado'];
 		$visitor['sexo'] = $request['sexo'];
-		$visitor['user_id'] = Auth::user()->id;
+		$visitor['user_id'] = 1;
 		$Visitor = Visitor::create($visitor);
 		return $Visitor;
 	}
