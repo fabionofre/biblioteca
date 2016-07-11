@@ -35,7 +35,15 @@ class VisitorController extends Controller
 		$visitor['cpf'] = $request['cpf'];
 		$visitor['rg'] = $request['rg'];
 		$visitor['phone'] = $request['phone'];
-		$visitor['user_id'] = 1;
+		$visitor['rua'] = $request['rua'];
+		$visitor['numero'] = $request['numero'];
+		$visitor['cep'] = $request['cep'];
+		$visitor['bairro'] = $request['bairro'];
+		$visitor['data_nascimento'] = $request['data_nascimento'];
+		$visitor['cidade'] = $request['cidade'];
+		$visitor['estado'] = $request['estado'];
+		$visitor['sexo'] = $request['sexo'];
+		$visitor['user_id'] = Auth::user()->id;
 		$Visitor = Visitor::create($visitor);
 		return $Visitor;
 	}

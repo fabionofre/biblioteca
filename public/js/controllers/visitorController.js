@@ -129,17 +129,16 @@ angular.module('biblioteca')
   $scope.mostraEndereco = false;
 
   $scope.confirmarCadastro = function(){
-
-    $uibModalInstance.close($scope.visitor);
+    $uibModalInstance.close($scope.visitante);
   }
 
   $scope.consultaCep = function(){
     url = '?cep='+$scope.visitante.cep;
     visitorAPI.consultaCep(url).success(function(data){
-        $scope.visitor.rua = data.logradouro;
-        $scope.visitor.bairro = data.bairro;
-        $scope.visitor.cidade = data.localidade;
-        $scope.visitor.estado = data.uf;
+      $scope.visitante.rua = data.logradouro;
+      $scope.visitante.bairro = data.bairro;
+      $scope.visitante.cidade = data.localidade;
+      $scope.visitante.estado = data.uf;
       $scope.mostraEndereco = true;
     }).error(function(){
       alert("CEP inválido ou falha de conexão! Por favor, digite o endereço manualmente.");
@@ -154,7 +153,7 @@ angular.module('biblioteca')
 })
 
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
-  $scope.visitor = visitante;
+  $scope.visitante = visitante;
   $scope.mostraEndereco = true;
   
   if($scope.visitante.sexo == "F")
@@ -163,7 +162,7 @@ angular.module('biblioteca')
     $scope.feminino = false;
 
   $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitor);
+    $uibModalInstance.close($scope.visitante);
   }
 
   $scope.cancelar = function(){
@@ -171,12 +170,12 @@ angular.module('biblioteca')
   }
 
   $scope.consultaCep = function(){
-    url = '?cep='+$scope.visitor.cep;
+    url = '?cep='+$scope.visitante.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      $scope.visitor.rua = data.logradouro;
-      $scope.visitor.bairro = data.bairro;
-      $scope.visitor.cidade = data.localidade;
-      $scope.visitor.estado = data.uf;
+      $scope.visitante.rua = data.logradouro;
+      $scope.visitante.bairro = data.bairro;
+      $scope.visitante.cidade = data.localidade;
+      $scope.visitante.estado = data.uf;
     })
   }
 
