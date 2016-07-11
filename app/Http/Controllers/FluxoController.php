@@ -22,7 +22,7 @@ class FluxoController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		fluxo['num_visitantes'] = $request['num_visitantes'];
+		$fluxo['num_visitantes'] = $request['num_visitantes'];
 		$Fluxo = Fluxo::create($fluxo);
 		return $Fluxo;
 	}
