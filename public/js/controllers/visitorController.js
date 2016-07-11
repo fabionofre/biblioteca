@@ -135,10 +135,12 @@ angular.module('biblioteca')
   $scope.consultaCep = function(){
     url = '?cep='+$scope.visitante.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      $scope.visitante.rua = data.logradouro;
-      $scope.visitante.bairro = data.bairro;
-      $scope.visitante.cidade = data.localidade;
-      $scope.visitante.estado = data.uf;
+      if(!data.error){
+        $scope.visitante.rua = data.logradouro;
+        $scope.visitante.bairro = data.bairro;
+        $scope.visitante.cidade = data.localidade;
+        $scope.visitante.estado = data.uf;
+      }
       $scope.mostraEndereco = true;
     }).error(function(){
       alert("CEP inválido ou falha de conexão! Por favor, digite o endereço manualmente.");
