@@ -129,18 +129,17 @@ angular.module('biblioteca')
   $scope.mostraEndereco = false;
 
   $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitante);
+
+    $uibModalInstance.close($scope.visitor);
   }
 
   $scope.consultaCep = function(){
     url = '?cep='+$scope.visitante.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      if(!data.error){
-        $scope.visitante.rua = data.logradouro;
-        $scope.visitante.bairro = data.bairro;
-        $scope.visitante.cidade = data.localidade;
-        $scope.visitante.estado = data.uf;
-      }
+        $scope.visitor.rua = data.logradouro;
+        $scope.visitor.bairro = data.bairro;
+        $scope.visitor.cidade = data.localidade;
+        $scope.visitor.estado = data.uf;
       $scope.mostraEndereco = true;
     }).error(function(){
       alert("CEP inválido ou falha de conexão! Por favor, digite o endereço manualmente.");
@@ -155,7 +154,7 @@ angular.module('biblioteca')
 })
 
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
-  $scope.visitante = visitante;
+  $scope.visitor = visitante;
   $scope.mostraEndereco = true;
   
   if($scope.visitante.sexo == "F")
@@ -164,7 +163,7 @@ angular.module('biblioteca')
     $scope.feminino = false;
 
   $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitante);
+    $uibModalInstance.close($scope.visitor);
   }
 
   $scope.cancelar = function(){
@@ -172,12 +171,12 @@ angular.module('biblioteca')
   }
 
   $scope.consultaCep = function(){
-    url = '?cep='+$scope.visitante.cep;
+    url = '?cep='+$scope.visitor.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      $scope.visitante.rua = data.logradouro;
-      $scope.visitante.bairro = data.bairro;
-      $scope.visitante.cidade = data.localidade;
-      $scope.visitante.estado = data.uf;
+      $scope.visitor.rua = data.logradouro;
+      $scope.visitor.bairro = data.bairro;
+      $scope.visitor.cidade = data.localidade;
+      $scope.visitor.estado = data.uf;
     })
   }
 
