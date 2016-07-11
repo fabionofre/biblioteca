@@ -155,7 +155,7 @@ angular.module('biblioteca')
 
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
   $scope.visitante = visitante;
-  $scope.visitante.sexo = 1ç
+  $scope.visitante.sexo = 1;
   $scope.mostraEndereco = true;
   
   if($scope.visitante.sexo == "F")
