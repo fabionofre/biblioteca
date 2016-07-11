@@ -347,6 +347,23 @@ angular.module('biblioteca')
     page: 1
   };
 
+
+  $scope.cadastrarVisitante = function(){
+    var modalInstance = $uibModal.open({
+      templateUrl: 'views/modais/cadastrarVisitante.html',
+      controller: 'cadastrarVisitanteCtrl'//Este controlador está no arquivo visitorController.js
+    });
+
+     modalInstance.result.then(function (visitante) {
+      if(visitante){
+        visitante.status = 1;
+        visitorAPI.saveVisitor(visitante).success(function(data){
+          
+        })
+      }
+    });
+  }
+
    $scope.onChange = function (page, limit) {
       $scope.consulta.page = page;
       $scope.consulta.limit = limit;

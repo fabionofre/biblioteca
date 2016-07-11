@@ -16,7 +16,7 @@
                     <label for="nome" class="col-sm-4 control-label" style="text-align: left;">Pesquisar Visitante</label>
                     <div class="row col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-model="pesquisa">
+                            <input type="text" class="form-control" style="text-transform: uppercase;" ng-model="pesquisa">
                                 <span class="input-group-addon">
                                     <button class="fa fa-search" ng-click="pesquisaVisitante();" style="background:transparent;border:none"></button>
                                 </span>
@@ -47,7 +47,6 @@
             <h5 ng-show="!mostrarTabela && botaoApertado" style="text-align: center;">Nenhum visitante encontrado!</h5>
             <uib-pagination total-items="total" ng-show="mostrarTabela" ng-model="consulta.page" max-size="5" items-per-page="consulta.limit" class="pagination-sm" boundary-links="true" force-ellipses="true" ng-change="onChange(consulta.page, consulta.limit)" first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"></uib-pagination>
         </div>
-        <div ng-show="preLoader" class="col-md-12 column"><img src="COLOCA O GIF AQUI"></div>
     </div>
 </div>
 <div class="modal-footer">
