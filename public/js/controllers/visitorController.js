@@ -60,9 +60,11 @@ angular.module('biblioteca')
      modalInstance.result.then(function (visitante) {
       if(visitante){
         visitante.status = 1;
-        visitorAPI.saveVisitor(visitante).success(function(data){
-          $scope.pesquisaVisitante();
-        })
+        if(visitante.cpf){
+          visitorAPI.saveVisitor(visitante).success(function(data){
+            $scope.pesquisaVisitante();
+          })
+        }
       }
     });
   }
@@ -130,6 +132,13 @@ angular.module('biblioteca')
   $scope.visitante = {};
   $scope.visitante.sexo = 1;
 
+  $scope.abaVisitante = true;
+
+  $scope.toggleAba = function(){
+    $scope.abaVisitante = !$scope.abaVisitante;
+    console.log($scope.abaVisitante);
+  }
+
   $scope.confirmarCadastro = function(){
     $uibModalInstance.close($scope.visitante);
   }
@@ -156,7 +165,6 @@ angular.module('biblioteca')
 
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
   $scope.visitante = visitante;
-  $scope.visitante.sexo = 1;
   $scope.mostraEndereco = true;
   
   if($scope.visitante.sexo == "F")

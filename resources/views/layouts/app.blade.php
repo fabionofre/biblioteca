@@ -91,8 +91,7 @@
 
 </body>
 <footer>
-    <div class="col-md-4"></div>
-    <div>© 2016 Biblioteca Pública Estadual do Acre | Desenvolvido por Fábio Onofre </div>
+    <div><h5 class="text-center">&copy;2016 Biblioteca Pública Estadual do Acre | Desenvolvido por Fábio Onofre</h5></div>
 </footer>
 <!-- Dependências -->
     <script src="js/angularJS.js"></script>
@@ -117,5 +116,9 @@
 <!-- Controlador e serviços dos visitantes -->
     <script src="js/controllers/visitorController.js"></script>
     <script src="js/services/visitorAPIService.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
 
