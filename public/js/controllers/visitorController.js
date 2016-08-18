@@ -60,11 +60,9 @@ angular.module('biblioteca')
      modalInstance.result.then(function (visitante) {
       if(visitante){
         visitante.status = 1;
-        if(visitante.cpf){
           visitorAPI.saveVisitor(visitante).success(function(data){
             $scope.pesquisaVisitante();
           })
-        }
       }
     });
   }
@@ -130,7 +128,9 @@ angular.module('biblioteca')
 
   $scope.mostraEndereco = false;
   $scope.visitante = {};
+  $scope.estrangeiro = {};
   $scope.visitante.sexo = 1;
+  $scope.estrangeiro.sexo = 1;
 
   $scope.abaVisitante = true;
 
@@ -140,7 +140,10 @@ angular.module('biblioteca')
   }
 
   $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitante);
+    if($scope.estrangeiro.name)
+      $uibModalInstance.close($scope.estrangeiro);
+    else
+      $uibModalInstance.close($scope.visitante);
   }
 
   $scope.consultaCep = function(){
@@ -166,6 +169,8 @@ angular.module('biblioteca')
 .controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
   $scope.visitante = visitante;
   $scope.mostraEndereco = true;
+  $scope.estrangeiro = {};
+  $scope.abaVisitante = true;
   
   if($scope.visitante.sexo == "F")
     $scope.feminino = true;
@@ -173,11 +178,26 @@ angular.module('biblioteca')
     $scope.feminino = false;
 
   $scope.confirmarCadastro = function(){
-    $uibModalInstance.close($scope.visitante);
+    if($scope.visitante.cpf)
+      $uibModalInstance.close($scope.visitante);
+    else
+      $uibModalInstance.close($scope.estrangeiro);
+
   }
 
   $scope.cancelar = function(){
     $uibModalInstance.dismiss('cancel');
+  }
+
+  $scope.toggleAba = function(){
+    $scope.abaVisitante = !$scope.abaVisitante;
+    if(!$scope.abaVisitante){
+      $scope.estrangeiro = $scope.visitante;
+      cpfVisitante = $scope.visitante.cpf;
+      $scope.estrangeiro.cpf = '';
+    }else{
+      $scope.visitante.cpf = cpfVisitante;
+    }
   }
 
   $scope.consultaCep = function(){
