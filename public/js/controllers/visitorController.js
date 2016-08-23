@@ -131,6 +131,8 @@ angular.module('biblioteca')
   $scope.estrangeiro = {};
   $scope.visitante.sexo = 1;
   $scope.estrangeiro.sexo = 1;
+  $scope.estrangeiro.sexoBool = true;
+  $scope.visitante.sexoBool = true;
 
   $scope.abaVisitante = true;
 
@@ -139,15 +141,21 @@ angular.module('biblioteca')
     console.log($scope.abaVisitante);
   }
 
-  if($scope.visitante.sexo == 1)
-    $scope.feminino = false;
-  else
-    $scope.feminino = true;
+  $scope.toggleSexoEstrangeiro = function(){
+    $scope.estrangeiro.sexoBool = !$scope.estrangeiro.sexoBool;
+    if($scope.estrangeiro.sexoBool)
+      $scope.estrangeiro.sexo = 1;
+    else
+      $scope.estrangeiro.sexo = 2;
+  }
 
-  if($scope.estrangeiro.sexo == 1)
-    $scope.feminino = false;
-  else
-    $scope.feminino = true;
+  $scope.toggleSexoVisitante = function(){
+    $scope.visitante.sexoBool = !$scope.visitante.sexoBool;
+    if($scope.visitante.sexoBool)
+      $scope.visitante.sexo = 1;
+    else
+      $scope.visitante.sexo = 2;
+  } 
 
   $scope.confirmarCadastro = function(){
     if($scope.estrangeiro.name)

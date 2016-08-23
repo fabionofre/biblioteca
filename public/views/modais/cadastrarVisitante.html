@@ -23,10 +23,10 @@
                         <div class="btn-group" data-toggle="buttons">
                             <div class="radio form-control col-sm-8">
                                 <label>
-                                    <input type="radio" name="radioFiltro" ng-checked="!feminino" ng-click="visitante.sexo=1" ng-value="visitante.sexo"/> Masculino
+                                    <input type="radio" name="radioFiltro" ng-checked="visitante.sexoBool" ng-click="toggleSexoVisitante();" /> Masculino
                                 </label>
                                 <label>
-                                    <input type="radio" name="radioFiltro" ng-checked="feminino" ng-value="visitante.sexo" ng-click="visitante.sexo=2" /> Feminino
+                                    <input type="radio" name="radioFiltro" ng-checked="!visitante.sexoBool" ng-click="toggleSexoVisitante();" /> Feminino
                                 </label>
                             </div>
                         </div>
@@ -112,10 +112,10 @@
                         <div class="btn-group" data-toggle="buttons">
                             <div class="radio form-control col-sm-8">
                                 <label>
-                                    <input type="radio" name="radioFiltro2" ng-checked="!feminino" ng-click="estrangeiro.sexo=1" ng-value="estrangeiro.sexo"/> Masculino
+                                    <input type="radio" name="radioFiltro2" ng-checked="estrangeiro.sexoBool" ng-click="toggleSexoEstrangeiro();"/> Masculino
                                 </label>
                                 <label>
-                                    <input type="radio" name="radioFiltro2" ng-value="estrangeiro.sexo" ng-checked="feminino" ng-click="estrangeiro.sexo=2" /> Feminino
+                                    <input type="radio" name="radioFiltro2" ng-checked="!estrangeiro.sexoBool" ng-click="toggleSexoEstrangeiro();" /> Feminino
                                 </label>
                             </div>
                         </div>
