@@ -139,6 +139,11 @@ angular.module('biblioteca')
     console.log($scope.abaVisitante);
   }
 
+  if($scope.visitante.sexo == "F")
+    $scope.feminino = true;
+  else
+    $scope.feminino = false;
+
   $scope.confirmarCadastro = function(){
     if($scope.estrangeiro.name)
       $uibModalInstance.close($scope.estrangeiro);
