@@ -139,10 +139,15 @@ angular.module('biblioteca')
     console.log($scope.abaVisitante);
   }
 
-  if($scope.visitante.sexo == "F")
-    $scope.feminino = true;
-  else
+  if($scope.visitante.sexo == 1)
     $scope.feminino = false;
+  else
+    $scope.feminino = true;
+
+  if($scope.estrangeiro.sexo == 1)
+    $scope.feminino = false;
+  else
+    $scope.feminino = true;
 
   $scope.confirmarCadastro = function(){
     if($scope.estrangeiro.name)
