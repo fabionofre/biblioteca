@@ -147,6 +147,8 @@ angular.module('biblioteca')
       $scope.estrangeiro.sexo = 1;
     else
       $scope.estrangeiro.sexo = 2;
+
+    console.log('SexoBool: ' + $scope.estrangeiro.sexoBool + '\nSexoNum: ' + $scope.estrangeiro.sexo);
   }
 
   $scope.toggleSexoVisitante = function(){
