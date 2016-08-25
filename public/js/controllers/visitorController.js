@@ -157,8 +157,12 @@ angular.module('biblioteca')
     }
   }
 
+
   $http.get('js/nacionalidades.json').success(function(data){
-      $scope.paises = data;
+    $scope.paises = [];
+    data.forEach(function(pais){
+      $scope.paises.push(pais.nome_pais);
+    });
   });
 
   $scope.confirmarCadastro = function(){
@@ -225,7 +229,7 @@ angular.module('biblioteca')
     $scope.visitante = visitante;
   }
 
-   $http.get('js/pais_origems.json').success(function(data){
+   $http.get('js/nacionalidades.json').success(function(data){
       $scope.paises = [];
       data.forEach(function(pais){
         $scope.paises.push(pais.nome_pais);
