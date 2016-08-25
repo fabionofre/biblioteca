@@ -217,7 +217,7 @@ angular.module('biblioteca')
   else
     visitante.sexo = 1;
 
-  if(visitante.pais_origem != 'brasileira' && visitante.data_nascimento){
+  if(visitante.pais_origem != 'brasileira' && visitante.data_nascimento && !visitante.cpf){
     $scope.estrangeiro = visitante;
     $scope.abaVisitante = false;
     $scope.classeAbaE = 'active';
