@@ -43,6 +43,8 @@ class VisitorController extends Controller
 		$visitor['cidade'] = $request['cidade'];
 		$visitor['estado'] = $request['estado'];
 		$visitor['sexo'] = $request['sexo'];
+		$visitor['pais_origem'] = $request['pais_origem'];
+		$visitor['status'] = $request['status'];
 		$visitor['user_id'] = 1;
 		$Visitor = Visitor::create($visitor);
 		return $Visitor;
@@ -68,6 +70,7 @@ class VisitorController extends Controller
 		$Visitor->cidade = $request['cidade'];
 		$Visitor->estado = $request['estado'];
 		$Visitor->sexo = $request['sexo'];
+		$Visitor->pais_origem = $request['pais_origem'];
 		$Visitor->status = $request['status'];
 		$Visitor->save();
  

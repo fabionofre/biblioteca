@@ -124,55 +124,73 @@ angular.module('biblioteca')
 
 })
 
-.controller('cadastrarVisitanteCtrl', function($scope, $uibModalInstance, visitorAPI){
+.controller('cadastrarVisitanteCtrl', function($scope, $uibModalInstance, $http, visitorAPI){
 
   $scope.mostraEndereco = false;
   $scope.visitante = {};
   $scope.estrangeiro = {};
-  $scope.visitante.sexo = 1;
-  $scope.estrangeiro.sexo = 1;
-  $scope.estrangeiro.sexoBool = true;
-  $scope.visitante.sexoBool = true;
-
+  $scope.visitante.sexo = 2;
+  $scope.estrangeiro.sexo = 2;
   $scope.abaVisitante = true;
+  $scope.estrangeiro.pais_origem;
+  $scope.classeAbaV = 'active';
+  $scope.classeTabV = 'tab-pane active';
+  var paises;
 
   $scope.toggleAba = function(){
     $scope.abaVisitante = !$scope.abaVisitante;
-    console.log($scope.abaVisitante);
+    if($scope.abaVisitante){
+      $scope.classeAbaV = 'active';
+      $scope.classeAbaE = '';
+      $scope.classeTabV = 'tab-pane active';
+      $scope.classeTabE = 'tab-pane';
+      $scope.visitante.cpf = '';
+      $scope.estrangeiro = $scope.visitante;
+    }
+    else{
+      $scope.classeAbaE = 'active';
+      $scope.classeAbaV = '';
+      $scope.classeTabE = 'tab-pane active';
+      $scope.classeTabV = 'tab-pane';
+      $scope.visitante.pais_origem = 'brasileira';
+      $scope.visitante = $scope.estrangeiro;
+    }
   }
 
-  $scope.toggleSexoEstrangeiro = function(){
-    $scope.estrangeiro.sexoBool = !$scope.estrangeiro.sexoBool;
-    if($scope.estrangeiro.sexoBool)
-      $scope.estrangeiro.sexo = 1;
-    else
-      $scope.estrangeiro.sexo = 2;
-
-    console.log('SexoBool: ' + $scope.estrangeiro.sexoBool + '\nSexoNum: ' + $scope.estrangeiro.sexo);
-  }
-
-  $scope.toggleSexoVisitante = function(){
-    $scope.visitante.sexoBool = !$scope.visitante.sexoBool;
-    if($scope.visitante.sexoBool)
-      $scope.visitante.sexo = 1;
-    else
-      $scope.visitante.sexo = 2;
-  } 
+  $http.get('js/pais_origems.json').success(function(data){
+      $scope.paises = data;
+  });
 
   $scope.confirmarCadastro = function(){
-    if($scope.estrangeiro.name)
+    if($scope.estrangeiro.name){
+      $scope.estrangeiro.pais_origem = $scope.estrangeiro.pais_origem.gentilico;
       $uibModalInstance.close($scope.estrangeiro);
-    else
+    }
+    else{
+      $scope.visitante.pais_origem = 'brasileira';
       $uibModalInstance.close($scope.visitante);
+    }
   }
 
   $scope.consultaCep = function(){
-    url = '?cep='+$scope.visitante.cep;
+    if($scope.visitante.cep)
+      url = '?cep='+$scope.visitante.cep;
+    else
+      url = '?cep='+$scope.estrangeiro.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      $scope.visitante.rua = data.logradouro;
-      $scope.visitante.bairro = data.bairro;
-      $scope.visitante.cidade = data.localidade;
-      $scope.visitante.estado = data.uf;
+      if($scope.visitante.cep){
+        $scope.visitante.rua = data.logradouro;
+        $scope.visitante.bairro = data.bairro;
+        $scope.visitante.cidade = data.localidade;
+        $scope.visitante.estado = data.uf;
+      }
+      else{
+        $scope.estrangeiro.rua = data.logradouro;
+        $scope.estrangeiro.bairro = data.bairro;
+        $scope.estrangeiro.cidade = data.localidade;
+        $scope.estrangeiro.estado = data.uf;
+      }
+
       $scope.mostraEndereco = true;
     }).error(function(){
       alert("CEP inválido ou falha de conexão! Por favor, digite o endereço manualmente.");
@@ -186,22 +204,43 @@ angular.module('biblioteca')
 
 })
 
-.controller('editarVisitanteCtrl', function($scope, $uibModalInstance, visitante, visitorAPI){
-  $scope.visitante = visitante;
+.controller('editarVisitanteCtrl', function($scope, $uibModalInstance, $http, visitante, visitorAPI){
   $scope.mostraEndereco = true;
+  $scope.visitante = {};
   $scope.estrangeiro = {};
-  $scope.abaVisitante = true;
-  
-  if($scope.visitante.sexo == "F")
-    $scope.feminino = true;
+  if(!visitante.sexo || visitante.sexo == 'F')
+    visitante.sexo = 2;
   else
-    $scope.feminino = false;
+    visitante.sexo = 1;
 
+  if(visitante.pais_origem != 'brasileira' && visitante.data_nascimento){
+    $scope.estrangeiro = visitante;
+    $scope.abaVisitante = false;
+    $scope.classeAbaE = 'active';
+    $scope.classeTabE = 'tab-pane active';
+  }else{
+    $scope.abaVisitante = true;
+    $scope.classeAbaV = 'active';
+    $scope.classeTabV = 'tab-pane active';
+    $scope.visitante = visitante;
+  }
+
+   $http.get('js/pais_origems.json').success(function(data){
+      $scope.paises = [];
+      data.forEach(function(pais){
+        $scope.paises.push(pais.nome_pais);
+      });
+    });
+
+  
   $scope.confirmarCadastro = function(){
-    if($scope.visitante.cpf)
+    if($scope.visitante.cpf){
+      $scope.visitante.pais_origem = 'brasileira';
       $uibModalInstance.close($scope.visitante);
-    else
+    }
+    else{
       $uibModalInstance.close($scope.estrangeiro);
+    }
 
   }
 
@@ -209,24 +248,46 @@ angular.module('biblioteca')
     $uibModalInstance.dismiss('cancel');
   }
 
-  $scope.toggleAba = function(){
+   $scope.toggleAba = function(){
     $scope.abaVisitante = !$scope.abaVisitante;
-    if(!$scope.abaVisitante){
+    if($scope.abaVisitante){
+      $scope.classeAbaV = 'active';
+      $scope.classeAbaE = '';
+      $scope.classeTabV = 'tab-pane active';
+      $scope.classeTabE = 'tab-pane';
+      $scope.visitante = $scope.estrangeiro;
+    }
+    else{
+      $scope.classeAbaE = 'active';
+      $scope.classeAbaV = '';
+      $scope.classeTabE = 'tab-pane active';
+      $scope.classeTabV = 'tab-pane';
+      $scope.visitante.pais_origem = 'brasileira';
+      $scope.visitante.cpf = '';
       $scope.estrangeiro = $scope.visitante;
-      cpfVisitante = $scope.visitante.cpf;
-      $scope.estrangeiro.cpf = '';
-    }else{
-      $scope.visitante.cpf = cpfVisitante;
+      console.log("visitante:"+$scope.visitante);
+      console.log("estrangeiro:"+$scope.estrangeiro);
     }
   }
 
   $scope.consultaCep = function(){
-    url = '?cep='+$scope.visitante.cep;
+    if($scope.visitante.cep)
+      url = '?cep='+$scope.visitante.cep;
+    else
+      url = '?cep='+$scope.estrangeiro.cep;
     visitorAPI.consultaCep(url).success(function(data){
-      $scope.visitante.rua = data.logradouro;
-      $scope.visitante.bairro = data.bairro;
-      $scope.visitante.cidade = data.localidade;
-      $scope.visitante.estado = data.uf;
+      if($scope.visitante.cep){
+        $scope.visitante.rua = data.logradouro;
+        $scope.visitante.bairro = data.bairro;
+        $scope.visitante.cidade = data.localidade;
+        $scope.visitante.estado = data.uf;
+      }
+      else{
+        $scope.estrangeiro.rua = data.logradouro;
+        $scope.estrangeiro.bairro = data.bairro;
+        $scope.estrangeiro.cidade = data.localidade;
+        $scope.estrangeiro.estado = data.uf;
+      }
     })
   }
 

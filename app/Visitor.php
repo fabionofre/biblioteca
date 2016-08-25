@@ -8,7 +8,7 @@ class Visitor extends Model
 {
 
 	protected $fillable = [
-        'name', 'cpf', 'rg', 'phone', 'rua', 'numero', 'cep', 'bairro', 'cidade','estado', 'user_id', 'status', 'data_nascimento', 'sexo'
+        'name', 'cpf', 'rg', 'phone', 'rua', 'numero', 'cep', 'bairro', 'cidade','estado', 'user_id', 'status', 'data_nascimento', 'sexo', 'pais_origem'
     ];
 
 	public function user(){
@@ -20,3 +20,4 @@ class Visitor extends Model
     }
 
 }
+ 
