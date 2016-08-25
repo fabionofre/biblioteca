@@ -157,7 +157,7 @@ angular.module('biblioteca')
     }
   }
 
-  $http.get('js/pais_origems.json').success(function(data){
+  $http.get('js/nacionalidades.json').success(function(data){
       $scope.paises = data;
   });
 
