@@ -424,8 +424,13 @@ angular.module('biblioteca')
           }
         });
 
-        modalInstance.result.then(function(){
-          $uibModalInstance.close(false);
+        modalInstance.result.then(function(fluxo){
+          if(fluxo){
+            $http.post('api/v1.0/Fluxo', fluxo).success(function(data){
+              console.log(data);
+            });
+          }
+            $uibModalInstance.close(false);
         });
       }
     
@@ -442,39 +447,22 @@ angular.module('biblioteca')
   $scope.visitor = visitante;
 
   fluxo = {};
+  fluxo.visitor_id = visitante.id;
 
   var data = new Date();
 
-  if(data.getDate() == 1){
-    fluxo.num_visitantes = 0;
-    $http.put('api/v1.0/Fluxo/1', fluxo);
-  }
-
-  $http.get('api/v1.0/Fluxo/1').success(function(data){
-    fluxo.num_visitantes = data.num_visitantes;
-  });
-  
 
   $scope.imprimir = function(){
-      
-      ++fluxo.num_visitantes;
-      $http.put('api/v1.0/Fluxo/1', fluxo);
-
-      
-
       var janela = window.open('about:blank');
-      janela.document.write("************************<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>* Biblioteca Pública do Estado do Acre *<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>************************<BR>&nbsp&nbsp&nbsp&nbsp"+  data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds()+"<BR><BR>Nome:<BR>&nbsp&nbsp&nbsp&nbsp"+$scope.visitor.name+"<BR>Telefone:<BR>&nbsp&nbsp&nbsp&nbsp"+$scope.visitor.phone+"<BR>Visitante Nº:<BR>&nbsp&nbsp"+fluxo.num_visitantes+"<BR>************************");
+      janela.document.write("************************<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>* Biblioteca Pública do Estado do Acre *<BR>*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*<BR>************************<BR>&nbsp&nbsp&nbsp&nbsp"+  data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds()+"<BR><BR>Nome:<BR>&nbsp&nbsp&nbsp&nbsp"+$scope.visitor.name+"<BR>Telefone:<BR>&nbsp&nbsp&nbsp&nbsp"+$scope.visitor.phone+"************************");
       janela.window.print();
       janela.window.print();
       janela.window.close();
-      $uibModalInstance.close(false);
-
+      $uibModalInstance.close(fluxo);
   }
 
   $scope.registrarEntrada = function(){
-    ++fluxo.num_visitantes;
-    $http.put('api/v1.0/Fluxo/1', fluxo)
-    $uibModalInstance.close(false);
+    $uibModalInstance.close(fluxo);
   }
 
   $scope.cancelar = function(){

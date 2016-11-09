@@ -35,7 +35,7 @@ class CabinetController extends Controller
 		$usuario = Auth::user();
 		if($usuario->tipo == 'admin'){
 	        $cabinet = $request->all();
-	        date_default_timezone_set('America/Sao_Paulo');
+	        date_default_timezone_set('America/Rio_Branco');
 			$data_hora = date('Y-m-d H:i');
 	        $cabinet['data_hora'] = $data_hora;
 			$Cabinet = Cabinet::create($cabinet);

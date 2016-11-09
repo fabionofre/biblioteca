@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fluxo extends Model
 {
-    protected $fillable = [
-        'num_visitantes'
-    ];
+	protected $fillable = ['atd_id', 'visitor_id'];
 }

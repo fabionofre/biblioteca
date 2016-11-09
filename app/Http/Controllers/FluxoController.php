@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Fluxo;
-
 use App\Http\Requests;
 
 class FluxoController extends Controller
@@ -22,7 +22,8 @@ class FluxoController extends Controller
 	 * @return Response
 	 */
 	public function store(Request $request) {
-		$fluxo['num_visitantes'] = $request['num_visitantes'];
+		$fluxo['visitor_id'] = $request['visitor_id'];
+		$fluxo['atd_id'] = Auth::id();
 		$Fluxo = Fluxo::create($fluxo);
 		return $Fluxo;
 	}
@@ -35,7 +36,6 @@ class FluxoController extends Controller
 	 */
 	public function update($id, Request $request) {
 		$fluxo = Fluxo::find($id);
-		$fluxo->num_visitantes = $request['num_visitantes'];
 		$fluxo->save();
  
 		return $fluxo;

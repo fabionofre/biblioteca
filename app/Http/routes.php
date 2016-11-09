@@ -29,11 +29,10 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => ['web']], function () {
-
+  Route::resource('api/v1.0/Visitor', 'VisitorController'); 
 });
 
 Route::resource('api/v1.0/oldVisitor', 'oldVisitorController');
-Route::resource('api/v1.0/Visitor', 'VisitorController'); 
 
 
 Route::group(['middleware' => 'web'], function () {

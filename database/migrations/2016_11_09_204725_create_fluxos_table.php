@@ -14,7 +14,10 @@ class CreateFluxosTable extends Migration
     {
         Schema::create('fluxos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('num_visitantes');
+            $table->integer('atd_id')->unsigned();
+            $table->foreign('atd_id')->references('id')->on('users');
+            $table->integer('visitor_id')->unsigned();
+            $table->foreign('visitor_id')->references('id')->on('visitors');
             $table->timestamps();
         });
     }
