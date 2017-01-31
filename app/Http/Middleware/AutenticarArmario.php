@@ -18,7 +18,7 @@ class AutenticarArmario
     public function handle($request, Closure $next)
     {
         $usuario = Auth::user();
-        if($usuario && ($usuario->tipo == 'atd' || $usuario->tipo == 'admin'))
+        if($usuario && ($usuario->tipo == 'atd' || $usuario->tipo == 'admin' || $usuario->tipo == 'coord'))
             return $next($request);
         return Redirect('/welcome');
     }

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">  
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-4"><h4>Relatório</h4></div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h2>Número de visitantes no mês <b><%visitantesMes%></b></h3>
+                    <hr>
+                    <div class="col-md-4">
+                        <h3>Nº Visitantes de</h3>
+                        <input type="text" placeholder="Dia..." maxlength="2" ng-model="filtroData.dia1" size="2"><b>/</b>
+                        <input type="text" placeholder="Mês..." maxlength="2" ng-model="filtroData.mes1" size="2"><b>/</b>
+                        <input type="text" placeholder="Ano..." maxlength="4" ng-model="filtroData.ano1" size="4">
+                        <h3>Até&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<numVisitantes id="numVisitantes"><%totalVisitantes%></numVisitantes>
+                        </h3>
+                        <input type="text" placeholder="Dia..." maxlength="2" ng-model="filtroData.dia2" size="2"><b>/</b>
+                        <input type="text" placeholder="Mês..." maxlength="2" ng-model="filtroData.mes2" size="2"><b>/</b>
+                        <input type="text" placeholder="Ano..." maxlength="4" ng-model="filtroData.ano2" size="4">
+                        <a ng-click="buscarNumVisitantes();" class="btn btn-default"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

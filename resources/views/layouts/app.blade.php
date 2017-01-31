@@ -17,6 +17,7 @@
     <!-- Styles -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/biblio.css">
     
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -56,11 +57,15 @@
                     @else
                     <!--<li><a href="/#/armarios">Armários</a></li> -->
                     <li><a href="/#/entrada">Entrada</a></li>
+                    <li><a href="#/visitantes">Visitantes</a></li>
                     @if (Auth::user()->tipo == 'admin')
                     <li><a href="#/registrar">Cadastrar Usuário</a></li>
                     @else
+                    @if (Auth::user()->tipo == 'coord')
+                    <li><a href="#/relatorios">Relatórios</a></li>
+                    @else
                     @if(Auth::user()->tipo == 'atd')
-                    <li><a href="#/visitantes">Visitantes</a></li>
+                    @endif
                     @endif
                     @endif
                     @endif
@@ -116,6 +121,9 @@
 <!-- Controlador e serviços dos visitantes -->
     <script src="js/controllers/visitorController.js"></script>
     <script src="js/services/visitorAPIService.js"></script>
+<!-- Controlador e serviços dos relatórios -->
+     <script src="js/controllers/relatoriosController.js"></script>
+     <script src="js/services/relatoriosAPIService.js"></script>
 
     <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

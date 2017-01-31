@@ -22,7 +22,11 @@ angular.module('biblioteca')
             .when("/entrada", {
                 templateUrl: "views/entrada.html",
                 controller: "entradaCtrl"
-            })
+        })
+            .when("/relatorios", {
+                templateUrl: "views/relatorios.html",
+                controller: "relatoriosCtrl"
+        })
             /*.when("/passar", {
                 templateUrl: "views/passarDadosVisitante.html",
                 controller: "passarDadosCtrl"
