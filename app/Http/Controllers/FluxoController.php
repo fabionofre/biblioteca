@@ -35,7 +35,7 @@ class FluxoController extends Controller
 		$fluxo = DB::table('fluxos')
             ->select('*')
             ->where('created_at','>=', $data1)
-            ->where('created_at','<',$data2)
+            ->where('created_at','<=',$data2)
             ->count();
         return \Response::json(array(
                     'erro'      => false,
