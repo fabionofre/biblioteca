@@ -37,7 +37,7 @@ angular.module('biblioteca')
 			url += '&dia=' + $scope.filtroData.dia1;
 			url += '&ano2=' + $scope.filtroData.ano2;
 			url += '&mes2=' + $scope.filtroData.mes2;
-			url += '&dia2' + $scope.filtroData.dia2;
+			url += '&dia2=' + $scope.filtroData.dia2;
 		}
 		console.log(url);
 		relatoriosAPI.buscaPorData(url).success(function(data){
